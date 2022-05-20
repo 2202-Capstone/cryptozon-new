@@ -9,6 +9,7 @@ const getSingleCollection = wrapAsync(async (req, res) => {
   if (!collection) throw new Error("Could not find the collection");
   return res.status(200).json({ status: "success", data: collection });
 });
+
 const editSingleCollection = wrapAsync(async (req, res) => {
   const collection = await Collections.findOne({
     where: { slug: req.query.slug },
