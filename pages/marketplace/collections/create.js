@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Heading } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import CollectionForm from "../../../components/marketplace/CollectionForm";
+import CollectionForm from "../../../components/marketplace/CreateCollectionForm";
 export default function CreateCollectionPage() {
   const { user } = useSelector((state) => state.user);
 

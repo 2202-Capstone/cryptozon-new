@@ -49,7 +49,7 @@ export default function SellButton({ marketplace, nft }) {
         })
       );
       setLoading(false);
-      onClose();
+
       toast({
         title: "Successfully listed nft",
         description: `Listed your nft for ${priceVal} eth`,
@@ -58,6 +58,7 @@ export default function SellButton({ marketplace, nft }) {
         duration: 5000,
         isClosable: true,
       });
+      onClose();
     } catch (err) {
       let errorMessage = "Something went wrong";
       console.log(err);

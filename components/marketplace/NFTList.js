@@ -4,6 +4,13 @@ import { Grid, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 export default function NFTList({ nfts, collectionName }) {
   const user = useSelector((state) => state.user);
+
+  nfts = [...nfts].sort((a, b) => {
+    if (!a.buyoutPrice) return 1;
+    if (!b.buyoutPrice) return -1;
+    return +a.buyoutPrice - +b.buyoutPrice;
+  });
+
   return (
     <Grid
       columnGap="1.3rem"
