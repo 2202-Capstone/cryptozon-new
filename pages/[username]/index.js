@@ -29,7 +29,8 @@ export async function getStaticProps({params}) {
     props: {
       user,
       nfts
-    }
+    },
+    revalidate: 1
   }
 }
 
@@ -41,6 +42,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false
+    fallback: true
   }
 }
