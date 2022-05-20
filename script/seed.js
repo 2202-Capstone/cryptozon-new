@@ -4,11 +4,7 @@ const { db, User, Post, Comments, Collections } = require("../db");
 
 const _users = [
   {
-<<<<<<< HEAD
     username: "bek",
-=======
-    username: 'bek',
->>>>>>> 0d393aaefcae9d8e801e9af44a7bfad858ba2525
     wallet: "0x83f2dbfa576bdba1C148484B43d07354A1fbed77",
     bio: "nft degen",
   },
