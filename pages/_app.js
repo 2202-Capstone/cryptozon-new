@@ -3,6 +3,7 @@ import store from "../store";
 import { Provider } from "react-redux";
 import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react"; // for chakra;
 import Layout from "../components/layout";
+import NoSsr from "../components/NoSsr";
 
 // This is the chainId your dApp will work on.
 const activeChainId = ChainId.Rinkeby;
@@ -17,6 +18,7 @@ const theme = extendTheme({ config });
 
 function MyApp({ Component, pageProps }) {
   return (
+    <NoSsr>
     <Provider store={store}>
       <ThirdwebProvider desiredChainId={activeChainId}>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -27,6 +29,7 @@ function MyApp({ Component, pageProps }) {
         </ChakraProvider>
       </ThirdwebProvider>
     </Provider>
+    </NoSsr>
   );
 }
 

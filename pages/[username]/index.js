@@ -17,30 +17,30 @@ export default function User({user, nfts}) {
   )
 }
 
-export async function getStaticProps({params}) {
-  const username = params.username
-  const userRes = await axios.get(`http://localhost:3000/api/users/${username}`)
-  const user = userRes.data
+// export async function getStaticProps({params}) {
+//   const username = params.username
+//   const userRes = await axios.get(`http://localhost:3000/api/users/${username}`)
+//   const user = userRes.data
 
-  const nftRes = await axios.get(`http://localhost:3000/api/nfts?owner=${user.wallet}`)
-  const nfts = nftRes.data.data
+//   const nftRes = await axios.get(`http://localhost:3000/api/nfts?owner=${user.wallet}`)
+//   const nfts = nftRes.data.data
 
-  return {
-    props: {
-      user,
-      nfts
-    }
-  }
-}
+//   return {
+//     props: {
+//       user,
+//       nfts
+//     }
+//   }
+// }
 
-export async function getStaticPaths() {
-  const res = await axios.get('http://localhost:3000/api/users')
-  const users = res.data
+// export async function getStaticPaths() {
+//   const res = await axios.get('http://localhost:3000/api/users')
+//   const users = res.data
 
-  const paths = users.map(user => ({params: {username: user.username.toString()}}))
+//   const paths = users.map(user => ({params: {username: user.username.toString()}}))
 
-  return {
-    paths,
-    fallback: false
-  }
-}
+//   return {
+//     paths,
+//     fallback: false
+//   }
+// }
