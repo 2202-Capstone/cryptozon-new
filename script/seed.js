@@ -35,12 +35,15 @@ const _post = [
     likes: 54,
     userId: 1,
     createdAt: "2022-05-12T16:20:11.065Z",
+    subscribedUsers: [1]
   },
   {
     content: "this is not some quality content",
     likes: 3,
     userId: 1,
     createdAt: "2022-05-12T16:20:12.065Z",
+    subscribedUsers: [1]
+
   },
   {
     content: "this quality content should have the default image",
@@ -48,6 +51,8 @@ const _post = [
     postImage: true,
     userId: 1,
     createdAt: "2022-05-12T16:20:13.065Z",
+    subscribedUsers: [1]
+
   },
   {
     content: "this quality content should have a custom image",
@@ -56,6 +61,8 @@ const _post = [
     imageUrl: "/assets/test_monke.png",
     userId: 1,
     createdAt: "2022-05-12T16:20:14.065Z",
+    subscribedUsers: [1]
+
   },
 ];
 

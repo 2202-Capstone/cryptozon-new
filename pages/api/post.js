@@ -1,6 +1,6 @@
 const {User, Post, Comments, LikePost, LikeComments} = require('../../db')
 export default async function handler(req,res){
-    const {method} = req;
+    const {method, body} = req;
     switch (method) {
         case 'GET':
             const postFromDB = await Post.findAll(
@@ -35,6 +35,19 @@ export default async function handler(req,res){
             //add post to db
             await Post.create(req.body);
             res.status(200).end();
+            break;
+
+        case 'PATCH':
+            const oldData = await Post.findAll({where:{
+                id: body.postId
+            }})
+            if(!oldData[0].subscribedUsers.includes(body.userId)){
+                let updatedUsers = [...oldData[0].subscribedUsers, body.userId]
+                await Post.update({subscribedUsers:updatedUsers},{where:{
+                    id: body.postId
+                }})
+            }
+            res.status(200).end()
             break;
         default:
             break;

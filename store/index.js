@@ -7,6 +7,7 @@ import { followingReducer } from "./following";
 import { selectedUserReducer } from "./selectedUser";
 import { activeNftReducer } from "./activeNfts";
 import collectionReducer from "./collections";
+import { notificationsReducer } from "./notifications";
 
 
 const reducer = {
@@ -18,6 +19,7 @@ const reducer = {
   nfts: nftReducer,
   activeNfts: activeNftReducer,
   collection: collectionReducer,
+  globalNotifications: notificationsReducer,
 
 };
 

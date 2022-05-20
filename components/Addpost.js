@@ -17,17 +17,18 @@ export default function Addpost() {
   };
   const closeModal = () => {
     setOpen(false);
-    setData({});
-  };
-  const addPost = (userId, post, imgUrl) => {
+    setData({})
+  }
+  const addPost = (userId,post,imgUrl) =>{
+    const initialSubs = [userId]
     const data = {
       userId: userId,
       content: post,
-      likes: 0,
-    };
-    if (!!imgUrl) {
-      data.imageUrl = imgUrl;
-      data.postImage = true;
+      subscribedUsers: initialSubs
+    }
+    if(!!imgUrl){
+      data.imageUrl = imgUrl
+      data.postImage = true
     }
     dispatch(newPost(data));
   };

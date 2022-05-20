@@ -7,6 +7,7 @@ const NFTs = require("./models/NFTs");
 const Follows = require("./models/Follows");
 const LikePost = require('./models/LikesPost');
 const LikeComments = require("./models/LikesComments");
+const Notifications = require("./models/Notifications");
 
 User.hasMany(Collections);
 Collections.belongsTo(User);
@@ -26,6 +27,8 @@ Post.hasMany(LikePost)
 Comments.hasMany(LikeComments)
 LikePost.belongsTo(User)
 LikeComments.belongsTo(User)
+Notifications.belongsTo(User)
+User.hasMany(Notifications)
 module.exports = {
   db,
   User,
@@ -35,5 +38,6 @@ module.exports = {
   Follows,
   NFTs,
   LikePost,
-  LikeComments
+  LikeComments,
+  Notifications
 };

@@ -6,10 +6,6 @@ const Post = db.define('post', {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  likesCount: {
-    type: Sequelize.INTEGER,
-    defaultValue:0
-  },
   postImage: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
@@ -18,6 +14,9 @@ const Post = db.define('post', {
   imageUrl:{
     type: Sequelize.TEXT,
     defaultValue: '/assets/question.png'
+  },
+  subscribedUsers:{
+    type: Sequelize.JSON,
   }
 })
 
