@@ -25,6 +25,7 @@ export default function User({user, nfts}) {
 //   const nftRes = await axios.get(`http://localhost:3000/api/nfts?owner=${user.wallet}`)
 //   const nfts = nftRes.data.data
 
+<<<<<<< HEAD
 //   return {
 //     props: {
 //       user,
@@ -32,6 +33,16 @@ export default function User({user, nfts}) {
 //     }
 //   }
 // }
+=======
+  return {
+    props: {
+      user,
+      nfts
+    },
+    revalidate: 1
+  }
+}
+>>>>>>> ded0edb7922bd4f241d6dc3d62024ec0ccffbd08
 
 // export async function getStaticPaths() {
 //   const res = await axios.get('http://localhost:3000/api/users')
@@ -39,8 +50,16 @@ export default function User({user, nfts}) {
 
 //   const paths = users.map(user => ({params: {username: user.username.toString()}}))
 
+<<<<<<< HEAD
 //   return {
 //     paths,
 //     fallback: false
 //   }
 // }
+=======
+  return {
+    paths,
+    fallback: true
+  }
+}
+>>>>>>> ded0edb7922bd4f241d6dc3d62024ec0ccffbd08

@@ -8,12 +8,14 @@ import {
   Button,
   useColorMode,
   IconButton,
+  Tooltip
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../store/userSlice";
+import { Avatar } from '@chakra-ui/react'
 
 const DarkModeSwitch = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -22,6 +24,7 @@ const DarkModeSwitch = () => {
   const connectWithMetamask = useMetamask();
   const router = useRouter();
   const dispatch = useDispatch();
+  const {user} = useSelector(state => state.user)
 
   useEffect(() => {
     if (address) {
@@ -33,6 +36,17 @@ const DarkModeSwitch = () => {
     <Flex w="100%">
       <Flex align="center" width="100%" justifyContent="flex-end" px="8">
         <Flex display={["none", "none", "flex"]} gap="3" mr="2" align="center">
+        <Link href="/post" passHref>
+            <Button
+              as={ChakraLink}
+              variant="ghost"
+              aria-label="Contact"
+              my={5}
+              w="100%"
+            >
+              Home
+            </Button>
+          </Link>
           <Link href="/marketplace/nfts" passHref>
             <Button
               as={ChakraLink}
@@ -55,21 +69,12 @@ const DarkModeSwitch = () => {
               Discovery
             </Button>
           </Link>
-          <Link href="/post" passHref>
-            <Button
-              as={ChakraLink}
-              variant="ghost"
-              aria-label="Contact"
-              my={5}
-              w="100%"
-            >
-              Post
-            </Button>
-          </Link>
+
           {address ? (
             <Fr>
+              <CreateNav />
               <Link href="/profile" passHref>
-                <Button
+                {/* <Button
                   as={ChakraLink}
                   variant="ghost"
                   aria-label="Contact"
@@ -77,9 +82,9 @@ const DarkModeSwitch = () => {
                   w="100%"
                 >
                   Profile
-                </Button>
+                </Button> */}
+                <Avatar name={user.username} src={user.iamgeUrl} style={{cursor: 'pointer'}}/>
               </Link>
-              <CreateNav />
             </Fr>
           ) : null}
 
@@ -108,7 +113,7 @@ const DarkModeSwitch = () => {
           onClick={() => changeDisplay("flex")}
         />
         <ChakraLink>
-          <Button onClick={toggleColorMode}>
+          <Button onClick={toggleColorMode} variant="ghost">
             {colorMode === "light" ? <BsMoonStarsFill /> : <BsSun />}
           </Button>
         </ChakraLink>

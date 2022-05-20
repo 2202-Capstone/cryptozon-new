@@ -1,5 +1,5 @@
 import { wrapAsync } from "../../../utils";
-import { Collections, User } from "../../../db";
+import { Collections, User, NFTs } from "../../../db";
 
 const createCollection = wrapAsync(async (req, res) => {
   const { name, profileImg, bannerImg, description = "", address } = req.body;
@@ -24,7 +24,7 @@ const createCollection = wrapAsync(async (req, res) => {
 
 const getAllCollections = wrapAsync(async (req, res) => {
   const collections = await Collections.findAll({
-    include: [{ model: User, attributes: ["username"] }],
+    include: [{ model: User, attributes: ["username"] }, { model: NFTs }],
   });
   return res.status(200).json({ status: "success", data: collections });
 });

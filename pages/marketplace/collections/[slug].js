@@ -16,7 +16,7 @@ export default function SingleCollectionPage() {
   const router = useRouter();
   const collection = useSelector((state) => state.collection);
   const { singleCollection } = collection;
-  console.log(singleCollection);
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (!router.query.slug) return;
