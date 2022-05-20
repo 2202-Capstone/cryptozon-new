@@ -29,7 +29,6 @@ const DarkModeSwitch = () => {
     }
   }, [address, dispatch]);
 
-
   return (
     <Flex w="100%">
       <Flex align="center" width="100%" justifyContent="flex-end" px="8">
@@ -41,7 +40,6 @@ const DarkModeSwitch = () => {
               aria-label="Contact"
               my={5}
               w="100%"
-              p={"0.8rem 1.7rem"}
             >
               Shop
             </Button>
@@ -51,10 +49,10 @@ const DarkModeSwitch = () => {
               as={ChakraLink}
               variant="ghost"
               aria-label="Contact"
-              my={5}
               w="100%"
+              px={9}
             >
-            Discovery
+              Discovery
             </Button>
           </Link>
           <Link href="/post" passHref>
@@ -86,21 +84,19 @@ const DarkModeSwitch = () => {
           ) : null}
 
           <ChakraLink>
-          {!address ? (
-            <Fr>
-              <Button
-                variant="ghost"
-                aria-label="Contact"
-                my={5}
-                w="100%"
-                onClick={connectWithMetamask}
-              >
-                Connect with Metamask
-              </Button>
-            </Fr>
-          ) : (
-            null
-          )}
+            {!address ? (
+              <Fr>
+                <Button
+                  variant="ghost"
+                  aria-label="Contact"
+                  my={5}
+                  w="100%"
+                  onClick={connectWithMetamask}
+                >
+                  Connect with Metamask
+                </Button>
+              </Fr>
+            ) : null}
           </ChakraLink>
         </Flex>
         <IconButton
@@ -160,7 +156,7 @@ const DarkModeSwitch = () => {
               my={5}
               w="100%"
             >
-            Discovery
+              Discovery
             </Button>
           </Link>
           {address ? (
@@ -189,9 +185,7 @@ const DarkModeSwitch = () => {
                   Connect with Metamask
                 </Button>
               </Fr>
-            ) : (
-              null
-            )}
+            ) : null}
           </ChakraLink>
         </Flex>
       </Flex>

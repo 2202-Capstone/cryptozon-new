@@ -103,7 +103,7 @@ const customLabels = {
     },
   },
 };
-TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(en);
 TimeAgo.addLabels("en", "custom", customLabels);
 const timeAgo = new TimeAgo("en-US");
 const customStyle = {
