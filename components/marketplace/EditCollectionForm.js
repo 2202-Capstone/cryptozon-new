@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 import {
   VStack,
   FormControl,
@@ -7,6 +9,7 @@ import {
   Button,
   Spinner,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import ImageInput from "../ImageInput";
 import { uploadImage } from "../../utils";
@@ -15,8 +18,11 @@ export default function EditCollectionForm({
   description,
   profileImg,
   bannerImg,
+  slug,
 }) {
   const formRef = useRef();
+  const toast = useToast();
+  const router = useRouter();
   const [image, setImage] = useState(profileImg);
   const [image2, setImage2] = useState(bannerImg);
   const [nameInput, setNameInput] = useState(name);
@@ -34,9 +40,68 @@ export default function EditCollectionForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formEl = formRef.current;
-    const { profile: profileImg, banner: bannerImg = "" } = Object.fromEntries([
+    const { profile, banner = "" } = Object.fromEntries([
       ...new FormData(formEl),
     ]);
+    try {
+      let profilePic;
+      let bannerPic;
+      if (image === profileImg) {
+        profilePic = image;
+      } else {
+        profilePic = profile;
+      }
+      if (image2 === bannerImg) {
+        bannerPic = image2;
+      } else {
+        bannerPic = banner;
+      }
+
+      if (
+        !nameInput ||
+        !(
+          profilePic.name ||
+          (typeof profilePic === "string" && profilePic.includes("https://"))
+        )
+      )
+        return toast({
+          title: "Required Input",
+          description: "Please provide a name and a profile picture",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      setLoadingColl(true);
+      let profileUrl,
+        bannerUrl = "";
+      if (profilePic.name) profileUrl = await uploadImage(profilePic);
+      if (bannerPic.name) bannerUrl = await uploadImage(bannerPic);
+
+      await axios.patch(`/api/collections/${slug}`, {
+        name: nameInput,
+        description: descriptionInput.trim(),
+        profileImg: profileUrl || profilePic,
+        bannerImg: bannerUrl ? bannerUrl : bannerPic.name ? bannerPic : "",
+      });
+      setLoadingColl(false);
+      toast({
+        title: "Success",
+        description: "Successfully edited collecton. Redirecting to profile.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      router.replace("/profile");
+    } catch (err) {
+      setLoadingColl(false);
+      toast({
+        title: "Editing Error",
+        description: "There was an error editing the collection",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -82,7 +147,7 @@ export default function EditCollectionForm({
         type="submit"
         isDisabled={loadingColl}
       >
-        {loadingColl ? <Spinner /> : "Create"}
+        {loadingColl ? <Spinner /> : "Edit"}
       </Button>
     </VStack>
   );

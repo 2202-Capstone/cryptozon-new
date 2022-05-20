@@ -54,6 +54,7 @@ export default function EditCollectionPage() {
         profileImg={profileImg}
         bannerImg={bannerImg}
         description={description}
+        slug={slug}
       />
     </Container>
   );

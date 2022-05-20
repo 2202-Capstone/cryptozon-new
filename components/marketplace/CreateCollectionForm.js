@@ -38,7 +38,7 @@ export default function CollectionForm({ address }) {
         duration: 5000,
         isClosable: true,
       });
-    if (!name || !profileImg)
+    if (!name || !profileImg.name)
       return toast({
         title: "Inputs Missing",
         description: "Name and profile picture are required",
