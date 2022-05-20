@@ -11,7 +11,7 @@ import {
 export default function CreateNav() {
   return (
     <Menu>
-      <MenuButton as={Button} w="100%">
+      <MenuButton as={Button} w="100%" variant="ghost">
         Create
       </MenuButton>
       <MenuList>
