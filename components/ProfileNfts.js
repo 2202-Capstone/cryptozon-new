@@ -1,9 +1,11 @@
 import React from "react";
-import { Container, Box, Divider, Image, Button, Text } from "@chakra-ui/react";
+import { Container, Box, Divider, Image, Button, Text, Tooltip } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
-  const isEmpty = nfts.length === 0;
+  const isEmpty = nfts.length === 0 ? true : false
+  const iconHover = hidden === true ? 'Display NFT' : 'Hide NFT';
+  console.log('dataaa',nfts.data)
 
   return (
     <>
@@ -47,8 +49,9 @@ export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
                   overflow="hidden"
                   m="10px"
                   maxW="290px"
+                  shadow='md'
                 >
-                  <Image src={nft.image} alt={nft.name} w="290px" h="250px" />
+                  <Image src={nft.image} alt={nft.name} w="290px" h="260px" />
                   <Box p="6">
                     <Box
                       mt="1"
@@ -56,27 +59,21 @@ export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
                       as="h4"
                       lineHeight="tight"
                       isTruncated
+                      fontSize={20}
                     >
                       {nft.name}
                     </Box>
                     <Box>{nft.description}</Box>
-                    <Button
-                      fontSize={10}
-                      h="15px"
-                      w="40px"
-                      mt={1}
-                      onClick={() => toggle(nft)}
-                    >
-                      toggle
-                    </Button>
-                    <HamburgerIcon ml="120px" />
+                    <Tooltip hasArrow label={iconHover}>
+                      <HamburgerIcon ml="225px" onClick={() => toggle(nft)} cursor='pointer'/>
+                    </Tooltip>
                   </Box>
                 </Box>
               ))}
           </Box>
         </Container>
       ) : (
-        <Text>~ no nfts to display ~</Text>
+        <Text textAlign='center'>~ no nfts to display ~</Text>
       )}
     </>
   );

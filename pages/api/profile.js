@@ -1,4 +1,4 @@
-import { User, Collections, Post } from "../../db/";
+import { User, Collections, Post, Comments, LikeComments } from "../../db/";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -14,7 +14,11 @@ export default async function handler(req, res) {
         defaults: {
           wallet: wallet
         },
-        include: [{model: Collections}, {model: Post}]
+        // include: [{model: Collections}, {model: Post}]
+        include: [
+          {model: Post, include: {model: Comments, include: [{model: User}, {model: LikeComments}]}},
+          {model: Collections, include: {model: User}}
+        ]
       })
       return res.status(200).send(user);
 

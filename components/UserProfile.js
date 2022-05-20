@@ -23,6 +23,8 @@ import Link from "next/link";
 import axios from "axios";
 import ProfileNfts from "./ProfileNfts";
 import ProfilePosts from "./ProfilePosts";
+// import CollectionItem from "./marketplace/CollectionItem";
+import CollectionList from "./marketplace/CollectionList";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
@@ -95,18 +97,17 @@ export default function UserProfile() {
               @{user.username ? user.username : "unnamed"}
             </Text>
             <Text mt={2}>{user.bio}</Text>
-            <Stack direction="row" fontSize={12} mt={10} spacing={5}>
+            <Stack direction="row" fontSize={12} mt={7} spacing={5}>
               <Link href="/profile/following">
-                {"Following " + user.following}
+                {user.following + " Following"}
               </Link>
               <Link href="/profile/followers">
-                {"Followers " + user.followers}
+                {user.followers + " Followers"}
               </Link>
             </Stack>
-            <Stack direction="row" spacing={200}>
-              <Text fontSize={12}>~ other social accounts ~</Text>
-              <EditProfile user={user} wallet={address} usernames={usernames} />
-            </Stack>
+              <Box ml={330}>
+                <EditProfile user={user} wallet={address} usernames={usernames} />
+              </Box>
           </Flex>
           {!user.username && (
             <Alert justifySelf="center" status="info" mt={8} w={460}>
@@ -130,9 +131,19 @@ export default function UserProfile() {
         <Button variant="ghost" onClick={() => setDisplay("POST")}>
           Posts
         </Button>
+        <Button variant="ghost" onClick={() => setDisplay("COLLECTION")}>Collections</Button>
       </Stack>
-      <Divider />
-      {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : <ProfilePosts posts={user.posts} user={user} />}
+      <Divider mb={7}/>
+      {/* {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? <ProfilePosts posts={user.posts} user={user} /> :
+        <CollectionList collections={user.collections} />
+      } */}
+      {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? <ProfilePosts posts={user.posts} user={user} /> : null}
+      {display === "COLLECTION" && user.collections.length ?
+      <CollectionList collections={user.collections} /> :
+      display === "COLLECTION" && user.collections.length === 0 ?
+      <Text textAlign='center'>~ no collections to display ~</Text>
+      : null
+    }
     </>
   );
 }

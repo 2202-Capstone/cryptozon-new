@@ -120,14 +120,14 @@ const _comments = [
     content:
       "Were giving you a final coutesy call to extend your cars extended warranty",
     likes: 12,
-    userId: 1,
+    userId: 2,
     postId: 3,
     createdAt: "2022-05-12T16:20:17.065Z",
   },
   {
     content: "I drained my mom's credit card to buy this NFT ^.^",
     likes: 9000,
-    userId: 1,
+    userId: 2,
     postId: 3,
     createdAt: "2022-05-12T16:20:18.065Z",
   },

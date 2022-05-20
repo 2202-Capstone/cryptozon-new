@@ -116,7 +116,7 @@ export default function Users({ user, nfts }) {
                 {"Followers " + selectedUser.followers}
               </Link>
             </Stack>
-            <Text fontSize={12}>~ other social accounts ~</Text>
+            {/* <Text fontSize={12}>~ other social accounts ~</Text> */}
           </Flex>
         </Box>
       </Container>
@@ -139,7 +139,7 @@ export default function Users({ user, nfts }) {
 
       {!!nfts && nfts.length && display === "NFT" ? (
         <Container
-          maxW={1000}
+          maxW={1100}
           display="flex"
           justifyContent="space-between"
           alignItems="center"
@@ -161,9 +161,10 @@ export default function Users({ user, nfts }) {
                   borderRadius="lg"
                   overflow="hidden"
                   m="10px"
-                  maxW="250px"
+                  maxW="290px"
+                  shadow='md'
                 >
-                  <Image src={nft.image} alt="Bored Ape" />
+                  <Image src={nft.image} alt={nft.name} w='290px' h='250px' />
                   <Box p="6">
                     <Box
                       mt="1"
@@ -171,6 +172,7 @@ export default function Users({ user, nfts }) {
                       as="h4"
                       lineHeight="tight"
                       isTruncated
+                      fontSize={20}
                     >
                       {nft.name}
                     </Box>
