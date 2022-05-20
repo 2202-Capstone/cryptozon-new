@@ -23,8 +23,8 @@ import Link from "next/link";
 import axios from "axios";
 import ProfileNfts from "./ProfileNfts";
 import ProfilePosts from "./ProfilePosts";
-// import CollectionItem from "./marketplace/CollectionItem";
 import CollectionList from "./marketplace/CollectionList";
+import SocialCard from "./SocialCard";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
@@ -34,8 +34,6 @@ export default function UserProfile() {
   const { nfts } = useSelector((state) => state.nfts);
   const [hidden, setHidden] = useState(false);
   const [display, setDisplay] = useState("NFT"); // switch bw post and nft
-
-  console.log("nftssss", nfts);
 
   useEffect(() => {
     if (address) {
@@ -134,10 +132,20 @@ export default function UserProfile() {
         <Button variant="ghost" onClick={() => setDisplay("COLLECTION")}>Collections</Button>
       </Stack>
       <Divider mb={7}/>
-      {/* {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? <ProfilePosts posts={user.posts} user={user} /> :
-        <CollectionList collections={user.collections} />
-      } */}
-      {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? <ProfilePosts posts={user.posts} user={user} /> : null}
+
+      {/* {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? <ProfilePosts posts={user.posts} user={user} /> : null}
+      {display === "COLLECTION" && user.collections.length ?
+      <CollectionList collections={user.collections} /> :
+      display === "COLLECTION" && user.collections.length === 0 ?
+      <Text textAlign='center'>~ no collections to display ~</Text>
+      : null
+    } */}
+
+    {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? (
+        <SocialCard posts={user.posts} />
+    )
+
+    : null}
       {display === "COLLECTION" && user.collections.length ?
       <CollectionList collections={user.collections} /> :
       display === "COLLECTION" && user.collections.length === 0 ?

@@ -1,7 +1,5 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import { useAddress, useMarketplace } from "@thirdweb-dev/react";
-
 
 const initialState = {
   nfts: [],
@@ -26,7 +24,6 @@ export const toggleHidden = createAsyncThunk(
   "nfts/toggleHidden",
   async (nft) => {
     try {
-      console.log('nft is', nft)
       const {data: updatedNft} = await axios.put('/api/nfts', nft)
       return updatedNft
     } catch(err) {
@@ -44,7 +41,6 @@ export const nftSlice = createSlice({
       state.status = "loading";
     },
     [fetchNfts.fulfilled]: (state, action) => {
-      console.log('payloaddd', action.payload)
       state.nfts = action.payload;
       state.status = "success";
     },
