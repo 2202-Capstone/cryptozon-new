@@ -45,7 +45,7 @@ export default function UserProfile() {
 
   // using this to compare usernames when editing and set up error handling
   async function getAllUsernames() {
-    const res = await axios.get("http://localhost:3000/api/users");
+    const res = await axios.get("/api/users");
     const names = res.data.map((u) => {
       if (u.username == user.username) {
         return "";
