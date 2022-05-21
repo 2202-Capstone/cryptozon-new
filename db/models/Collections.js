@@ -26,4 +26,12 @@ Collection.beforeCreate(async (collection) => {
   collection.slug = slugify(collection.name, { replacement: "_", lower: true });
 });
 
+Collection.beforeUpdate(async (collection) => {
+  if (collection._changed.has("name"))
+    collection.slug = slugify(collection.name, {
+      replacement: "_",
+      lower: true,
+    });
+});
+
 module.exports = Collection;

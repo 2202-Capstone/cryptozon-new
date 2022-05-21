@@ -33,6 +33,7 @@
     "text-to-image": "^5.2.0"
   },
   "devDependencies": {
+    "@vercel/node": "^1.15.3",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0"
   }

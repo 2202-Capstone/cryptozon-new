@@ -113,7 +113,7 @@ const DarkModeSwitch = () => {
           onClick={() => changeDisplay("flex")}
         />
         <ChakraLink>
-          <Button onClick={toggleColorMode}>
+          <Button onClick={toggleColorMode} variant="ghost">
             {colorMode === "light" ? <BsMoonStarsFill /> : <BsSun />}
           </Button>
         </ChakraLink>

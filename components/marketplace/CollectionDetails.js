@@ -12,7 +12,7 @@ export default function CollectionDetails({
 }) {
   return (
     <Fr>
-      <Gi gridRow="1 / 2" gridColumn="1 / -1" justifySelf="stretch">
+      <Gi gridRow="1 / 2" gridColumn="1 / -1" justifySelf="stretch ">
         {coll.bannerImg ? (
           <Image
             src={coll.bannerImg}
