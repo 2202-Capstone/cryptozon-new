@@ -6,14 +6,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import NFTSingleItem from "../../../components/marketplace/NFTSingleItem";
 
-// export const getStaticProps = async ({ params }) => {
-//   const { tokenId } = params;
-//   console.log(tokenId);
+// export const getServerSideProps = async (context) => {
 //   return {
-//     props: {
-//       tokenId,
-//     },
-//   };
+//     props: {}
+//   }
 // }
 
 
@@ -54,12 +50,6 @@ const NFTDetails = () => {
   else{
     return (null)
   }
-
-  // return (
-  //   <div>
-  //     Okay
-  //   </div>
-  // )
 }
 
 

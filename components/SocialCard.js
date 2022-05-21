@@ -102,8 +102,15 @@ export const SocialCard = (props) => {
     alert("Please Log In with your wallet!");
   };
   let tempPost = [];
-  if (!!post) {
-    tempPost = [...post];
+  // if (!!post) {
+  //   tempPost = [...post];
+  // }
+  if (!!props.posts) {
+    tempPost = [...props.posts]
+  } else {
+    if (!!post) {
+      tempPost = [...post];
+    }
   }
   return (
     <Box display="flex" flexDirection="column" align="center" gap="4">
