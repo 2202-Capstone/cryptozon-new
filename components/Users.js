@@ -26,7 +26,7 @@ import { FcApproval } from "react-icons/fc";
   when visiting this pg, we'll have to use the username to get their wallet, and from there we can grab their nfts based on their wallet
 */
 
-export default function Users({ user, nfts }) {
+export default function Users({user, nfts}) {
   const router = useRouter();
   const dispatch = useDispatch();
   const wallet = useAddress();
@@ -35,7 +35,7 @@ export default function Users({ user, nfts }) {
   const [display, setDisplay] = useState("NFT");
 
   useEffect(() => {
-    dispatch(fetchSelectedUser(user.username));
+    dispatch(fetchSelectedUser(router.query.username));
     if (wallet) {
       checkIfFollowing();
     }
@@ -58,7 +58,7 @@ export default function Users({ user, nfts }) {
       params: { info },
     });
     data.forEach((f) => {
-      if (f.username == user.username) {
+      if (f.username == selectedUser.username) {
         setIsFollowing(true);
       }
     });
@@ -81,7 +81,7 @@ export default function Users({ user, nfts }) {
           width={600}
         >
           <Image
-            alt={user.username}
+            alt={selectedUser.username}
             w={200}
             h={200}
             borderRadius={100}
@@ -185,14 +185,14 @@ export default function Users({ user, nfts }) {
       ) : display !== "NFT" ? null : (
         <Text textAlign="center">~ no nfts to display ~</Text>
       )}
-      {!!user.posts && user.posts.length && display === "POST" ? (
+      {!!selectedUser.posts && selectedUser.posts.length && display === "POST" ? (
         <Container
           display="flex"
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
         >
-          {user.posts.map((p) => (
+          {selectedUser.posts.map((p) => (
             <Box key={p.id} w={400} borderWidth={1} mt={5}>
               <Stack direction="row" display="flex" alignItems="center">
                 <Image

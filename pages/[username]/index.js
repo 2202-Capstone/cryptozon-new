@@ -3,6 +3,7 @@ import axios from 'axios'
 import Users from '../../components/Users'
 import { useAddress } from "@thirdweb-dev/react"
 import { useRouter } from 'next/router'
+import { Text } from '@chakra-ui/react'
 
 export default function User({user, nfts}) {
   const address = useAddress();
@@ -10,9 +11,14 @@ export default function User({user, nfts}) {
   if (user.wallet == address) {
     router.push('/profile')
   }
+
+  if (router.isFallback) {
+    return (<Text>Loading...</Text>)
+  }
+
   return (
     <>
-      <Users user={user} nfts={nfts} />
+      <Users />
     </>
   )
 }
