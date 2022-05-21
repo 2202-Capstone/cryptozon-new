@@ -17,7 +17,7 @@ const NFTSingleItem = (props) => {
     process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS
   );
   const router = useRouter();
-    console.log(router.query)
+    // console.log(router.query)
   const buyNFT = async () => {
     try {
       await marketplace.buyoutListing(id, 1);

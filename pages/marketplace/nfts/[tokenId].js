@@ -26,32 +26,28 @@ const NFTDetails = () => {
     const WINDOW_URL = window.location.href;
     const testURL = URL_PREFIX + nft.tokenId
     if (WINDOW_URL == testURL) {
-      // console.log(nft);
+      console.log(nft);
       return nft;
     }
   })
+  if(!!singleNFTData[0]) {
+    const { name, description, image } = singleNFTData[0].asset;
+    const { id, buyoutPrice, tokenId } = singleNFTData[0];
+    const price = buyoutPrice / 1e18;
 
-  const { name, description, image } = singleNFTData[0].asset;
-  const { id, buyoutPrice, tokenId } = singleNFTData[0];
-  const price = buyoutPrice / 1e18;
+    return (
+      <NFTSingleItem
+        key={tokenId}
+        name={name}
+        description={description}
+        image={image}
+        price={price}
+        id={id}
+        tokenId={tokenId}
+      />
+    )
+  }
 
-  return (
-    <NFTSingleItem
-      key={tokenId}
-      name={name}
-      description={description}
-      image={image}
-      price={price}
-      id={id}
-      tokenId={tokenId}
-    />
-  )
-
-  // return (
-  //   <div>
-  //     Okay
-  //   </div>
-  // )
   }
 }
 
