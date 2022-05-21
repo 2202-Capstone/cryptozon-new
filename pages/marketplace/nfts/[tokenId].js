@@ -6,14 +6,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import NFTSingleItem from "../../../components/marketplace/NFTSingleItem";
 
-// export const getStaticProps = async ({ params }) => {
-//   const { tokenId } = params;
-//   console.log(tokenId);
+// export const getServerSideProps = async (context) => {
 //   return {
-//     props: {
-//       tokenId,
-//     },
-//   };
+//     props: {}
+//   }
 // }
 
 
@@ -21,8 +17,11 @@ import NFTSingleItem from "../../../components/marketplace/NFTSingleItem";
 
 const NFTDetails = () => {
   const { activeNfts } = useSelector((store) => store);
-  const activeNow = activeNfts.activeNfts[0];
-  const singleNFTData = activeNow.filter((nft) => {
+  if (activeNfts.length === 0) {
+    return <div>Loading</div>;
+  } else {
+    const activeNow = activeNfts.activeNfts[0];
+    const singleNFTData = activeNow.filter((nft) => {
     const URL_PREFIX = "http://localhost:3000/marketplace/nfts/";
     const WINDOW_URL = window.location.href;
     const testURL = URL_PREFIX + nft.tokenId
@@ -53,6 +52,7 @@ const NFTDetails = () => {
   //     Okay
   //   </div>
   // )
+  }
 }
 
 
