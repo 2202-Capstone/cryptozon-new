@@ -7,19 +7,6 @@ import { useSelector } from "react-redux";
 import NFTSingleItem from "../../../components/marketplace/NFTSingleItem";
 import NoSsr from "../../../components/NoSsr";
 
-// export const getStaticProps = async ({ params }) => {
-//   const { tokenId } = params;
-//   console.log(tokenId);
-//   return {
-//     props: {
-//       tokenId,
-//     },
-//   };
-// }
-
-
-
-
 const NFTDetails = () => {
   const { activeNfts } = useSelector((store) => store);
   const activeNow = activeNfts.activeNfts[0];
@@ -58,11 +45,6 @@ const NFTDetails = () => {
     return (null)
   }
 
-  // return (
-  //   <div>
-  //     Okay
-  //   </div>
-  // )
 }
 
 

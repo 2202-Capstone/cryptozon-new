@@ -26,19 +26,19 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     // // set redux store with all nfts from marketplace contract
-    getAllActiveListings();
-    getAllListings();
+    const interval = setInterval(() => {
+      getAllActiveListings();
+      getAllListings();
+    }, 15000)
+
+    return () => {
+      clearInterval(interval)
+    }
   }, []);
 
   const getAllListings = async () => {
     try {
       const nftList = await marketplace.getAllListings();
-      // nftList.reduce((acc, curr) => {
-      //   const price = curr.buyoutPrice / 1e18;
-      //   JSON.stringify(price);
-      //   // console.log(price);
-      //   return [...acc,
-      // }, [])
       setAllNFTListings(nftList);
       // dispatch(setNFT(nftList));
     } catch (error) {
@@ -49,7 +49,7 @@ export default function Layout({ children }) {
   const getAllActiveListings = async () => {
     try {
       const nftList = await marketplace.getActiveListings();
-      console.log(nftList);
+      // console.log(nftList);
       setAllActiveListings(nftList);
       dispatch(setActiveNft(nftList));
     } catch (error) {
