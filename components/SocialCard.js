@@ -28,6 +28,7 @@ import { useAddress } from "@thirdweb-dev/react";
 import { fetchUser } from "../store/userSlice";
 import Addpost from "./Addpost";
 import Link from "next/link";
+import { MinusIcon } from "@chakra-ui/icons";
 
 export const SocialCard = (props) => {
   const address = useAddress();
@@ -175,6 +176,30 @@ export const SocialCard = (props) => {
                     <Icon fill="cyan.500" as={MdVerified} />
                   </Box>
                 </Link>
+                 {/* <Box
+                    display="flex"
+                    alignItems="center"
+                    gap="1"
+                    p="2"
+                  >
+                    <Link key={user.username} href={`/${user.username}`} passHref>
+                      <Box display='flex' alignItems='center' cursor='pointer'>
+                    <Image
+                      padding="2px"
+                      margin="2px"
+                      borderRadius="full"
+                      boxSize="50px"
+                      alt=""
+                      src={user.imageUrl}
+                    />
+                    <Box ml={2}>{user.username}</Box>
+                    <Icon fill="cyan.500" as={MdVerified} ml={1}/>
+                    </Box>
+                    </Link>
+                    {!!props.me ? <MinusIcon ml={370}/> : null}
+                  </Box> */}
+
+
                 {postImage ? (
                   <Box>
                     <Image src={imageUrl} alt="" width="100%" />

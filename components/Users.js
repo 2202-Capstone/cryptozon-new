@@ -24,8 +24,6 @@ import CollectionList from "./marketplace/CollectionList";
 /*
   this pg is nearly identical to the profile pg, but this is specifically for other users when you visit their profile;
   functionality and display are a bit different, you can't edit their pg and you can't view their hidden nfts
-
-  when visiting this pg, we'll have to use the username to get their wallet, and from there we can grab their nfts based on their wallet
 */
 
 export default function Users() {
@@ -33,18 +31,18 @@ export default function Users() {
   const dispatch = useDispatch();
   const wallet = useAddress();
   const { selectedUser } = useSelector((state) => state.selectedUser);
-  const {nfts} = useSelector(state => state.nfts)
+  const { nfts } = useSelector((state) => state.nfts);
   const { AllPost: post, status } = useSelector((state) => state.socialPost);
   const [isFollowing, setIsFollowing] = useState(false);
   const [display, setDisplay] = useState("NFT");
-  const username = !!selectedUser ? selectedUser.username : null
-  const selectedUserWallet = !!selectedUser ? selectedUser.wallet : null
+  const username = !!selectedUser ? selectedUser.username : null;
+  const selectedUserWallet = !!selectedUser ? selectedUser.wallet : null;
 
   useEffect(() => {
     dispatch(fetchSelectedUser(router.query.username));
     if (selectedUserWallet) {
       checkIfFollowing();
-      dispatch(fetchNfts(selectedUserWallet))
+      dispatch(fetchNfts(selectedUserWallet));
     }
   }, [wallet, username, selectedUserWallet, post]);
 
@@ -78,7 +76,7 @@ export default function Users() {
   }
 
   if (!!wallet && wallet == selectedUser.wallet) {
-    router.push('/profile')
+    router.push("/profile");
   }
 
   return (
@@ -175,9 +173,9 @@ export default function Users() {
                   overflow="hidden"
                   m="10px"
                   maxW="290px"
-                  shadow='md'
+                  shadow="md"
                 >
-                  <Image src={nft.image} alt={nft.name} w='290px' h='250px' />
+                  <Image src={nft.image} alt={nft.name} w="290px" h="250px" />
                   <Box p="6">
                     <Box
                       mt="1"
@@ -198,57 +196,18 @@ export default function Users() {
       ) : display !== "NFT" ? null : (
         <Text textAlign="center">~ no nfts to display ~</Text>
       )}
-      {
-        display === "POST" && selectedUser.posts.length ?
-        (<Box display='flex' justifyContent='center'>
+      {display === "POST" && selectedUser.posts.length ? (
+        <Box display="flex" justifyContent="center">
           <SocialCard posts={selectedUser.posts} user={selectedUser} />
-        </Box> ):
-        display === "POST" && selectedUser.posts.length === 0 ?
-        <Text textAlign='center'>~ no posts to display ~</Text> :
-        null
-      }
-      {
-        display === "COLLECTION" && selectedUser.collections.length ?
-        (<CollectionList collections={selectedUser.collections} />) :
-        display === "COLLECTION" && selectedUser.collections.length === 0 ?
-        (<Text textAlign='center'>~ no collections to display ~</Text>) :
-        null
-      }
-
-      {/* {!!selectedUser.posts && selectedUser.posts.length && display === "POST" ? (
-        <Container
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        > } */}
-          {/* {selectedUser.posts.map((p) => (
-            <Box key={p.id} w={400} borderWidth={1} mt={5}>
-              <Stack direction="row" display="flex" alignItems="center">
-                <Image
-                  src={user.imageUrl}
-                  h="50px"
-                  w="50px"
-                  borderRadius={100}
-                  m={2}
-                  alt='post'
-                />
-                <Text fontSize={16} mt={5}>
-                  {user.username}
-                </Text>
-                <FcApproval />
-              </Stack>
-              <Image src={p.imageUrl} alt="post" w={400} h={300} />
-              <Text ml={3} p={5}>
-                {p.content}
-              </Text>
-            </Box>
-          ))} */}
-          {/* <SocialCard posts={selectedUser.posts} />
-        </Container>
-      ) : display === "NFT" ? null : (
+        </Box>
+      ) : display === "POST" && selectedUser.posts.length === 0 ? (
         <Text textAlign="center">~ no posts to display ~</Text>
-      )} */}
+      ) : null}
+      {display === "COLLECTION" && selectedUser.collections.length ? (
+        <CollectionList collections={selectedUser.collections} />
+      ) : display === "COLLECTION" && selectedUser.collections.length === 0 ? (
+        <Text textAlign="center">~ no collections to display ~</Text>
+      ) : null}
     </>
   );
 }
