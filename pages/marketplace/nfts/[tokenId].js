@@ -5,6 +5,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import NFTSingleItem from "../../../components/marketplace/NFTSingleItem";
+import NoSsr from "../../../components/NoSsr";
 
 // export const getStaticProps = async ({ params }) => {
 //   const { tokenId } = params;
@@ -40,6 +41,7 @@ const NFTDetails = () => {
     const { id, buyoutPrice, tokenId } = singleNFTData[0];
     const price = buyoutPrice / 1e18;
     return (
+      <NoSsr>
       <NFTSingleItem
         key={tokenId}
         name={name}
@@ -49,6 +51,7 @@ const NFTDetails = () => {
         id={id}
         tokenId={tokenId}
       />
+      </NoSsr>
     )
   }
   else{

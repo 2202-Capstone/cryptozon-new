@@ -18,7 +18,6 @@ const theme = extendTheme({ config });
 
 function MyApp({ Component, pageProps }) {
   return (
-    <NoSsr>
     <Provider store={store}>
       <ThirdwebProvider desiredChainId={activeChainId}>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -29,7 +28,6 @@ function MyApp({ Component, pageProps }) {
         </ChakraProvider>
       </ThirdwebProvider>
     </Provider>
-    </NoSsr>
   );
 }
 
