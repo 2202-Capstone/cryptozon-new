@@ -26,14 +26,17 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     // // set redux store with all nfts from marketplace contract
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
+    //   getAllActiveListings();
+    //   getAllListings();
+    // }, 15000)
+
+    // return () => {
+    //   clearInterval(interval)
+    // }
+
       getAllActiveListings();
       getAllListings();
-    }, 15000)
-
-    return () => {
-      clearInterval(interval)
-    }
   }, []);
 
   const getAllListings = async () => {
