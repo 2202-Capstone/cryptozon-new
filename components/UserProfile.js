@@ -11,7 +11,6 @@ import {
   Spinner,
   Alert,
   AlertIcon,
-  Grid,
   GridItem as Gi,
 } from "@chakra-ui/react";
 import { fetchUser } from "../store/userSlice";
@@ -34,6 +33,7 @@ export default function UserProfile() {
   const { nfts } = useSelector((state) => state.nfts);
   const [hidden, setHidden] = useState(false);
   const [display, setDisplay] = useState("NFT"); // switch bw post and nft
+  const { AllPost: post, status } = useSelector((state) => state.socialPost);
 
   useEffect(() => {
     if (address) {
@@ -41,7 +41,7 @@ export default function UserProfile() {
       getAllUsernames();
       dispatch(fetchNfts(address));
     }
-  }, [address]);
+  }, [address, post]);
 
   // using this to compare usernames when editing and set up error handling
   async function getAllUsernames() {
@@ -103,9 +103,9 @@ export default function UserProfile() {
                 {user.followers + " Followers"}
               </Link>
             </Stack>
-              <Box ml={330}>
-                <EditProfile user={user} wallet={address} usernames={usernames} />
-              </Box>
+            <Box ml={330}>
+              <EditProfile user={user} wallet={address} usernames={usernames} />
+            </Box>
           </Flex>
           {!user.username && (
             <Alert justifySelf="center" status="info" mt={8} w={460}>
@@ -129,29 +129,28 @@ export default function UserProfile() {
         <Button variant="ghost" onClick={() => setDisplay("POST")}>
           Posts
         </Button>
-        <Button variant="ghost" onClick={() => setDisplay("COLLECTION")}>Collections</Button>
+        <Button variant="ghost" onClick={() => setDisplay("COLLECTION")}>
+          Collections
+        </Button>
       </Stack>
-      <Divider mb={7}/>
-
-      {/* {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? <ProfilePosts posts={user.posts} user={user} /> : null}
-      {display === "COLLECTION" && user.collections.length ?
-      <CollectionList collections={user.collections} /> :
-      display === "COLLECTION" && user.collections.length === 0 ?
-      <Text textAlign='center'>~ no collections to display ~</Text>
-      : null
-    } */}
-
-    {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? (
-        <SocialCard posts={user.posts} />
-    )
-
-    : null}
-      {display === "COLLECTION" && user.collections.length ?
-      <CollectionList collections={user.collections} /> :
-      display === "COLLECTION" && user.collections.length === 0 ?
-      <Text textAlign='center'>~ no collections to display ~</Text>
-      : null
-    }
+      <Divider mb={7} />
+      {display === "NFT" ? (
+        <ProfileNfts
+          nfts={nfts}
+          hidden={hidden}
+          toggle={toggle}
+          setHidden={setHidden}
+        />
+      ) : display === "POST" ? (
+        <Box display="flex" justifyContent="center">
+          <SocialCard posts={user.posts} me={user} />
+        </Box>
+      ) : null}
+      {display === "COLLECTION" && user.collections.length ? (
+        <CollectionList collections={user.collections} />
+      ) : display === "COLLECTION" && user.collections.length === 0 ? (
+        <Text textAlign="center">~ no collections to display ~</Text>
+      ) : null}
     </>
   );
 }

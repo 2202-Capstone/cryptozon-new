@@ -1,4 +1,4 @@
-const {User, Follows, Post} = require('../../../db')
+const {User, Follows, Post, LikePost, LikeComments, Collections, Comments} = require('../../../db')
 
 export default async function handler(req, res) {
   const {method, query: {username}} = req;
@@ -6,11 +6,27 @@ export default async function handler(req, res) {
 
   switch (method) {
     case 'GET':
+      // const user = await User.findOne({
+      //   where: {
+      //     username: username
+      //   },
+      //   include: {model: Post}
+      // });
       const user = await User.findOne({
         where: {
           username: username
         },
-        include: {model: Post}
+        include: [
+          {model: Collections, include: {model: User}},
+          {model: Post, include: [
+            {model: User},
+            {model: LikePost},
+            {model: Comments, include: [
+              {model: User},
+              {model: LikeComments}
+          ]}
+          ]}
+        ]
       });
       res.status(200).json(user)
       break
