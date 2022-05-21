@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import { fetchSelectedUser } from "../store/selectedUser";
 import axios from "axios";
 import { FcApproval } from "react-icons/fc";
+import SocialCard from "./SocialCard";
 
 /*
   this pg is nearly identical to the profile pg, but this is specifically for other users when you visit their profile;
@@ -26,20 +27,21 @@ import { FcApproval } from "react-icons/fc";
   when visiting this pg, we'll have to use the username to get their wallet, and from there we can grab their nfts based on their wallet
 */
 
-export default function Users({user, nfts}) {
+export default function Users() {
   const router = useRouter();
   const dispatch = useDispatch();
   const wallet = useAddress();
   const { selectedUser } = useSelector((state) => state.selectedUser);
   const [isFollowing, setIsFollowing] = useState(false);
   const [display, setDisplay] = useState("NFT");
+  const {username} = router.query
 
   useEffect(() => {
     dispatch(fetchSelectedUser(router.query.username));
     if (wallet) {
       checkIfFollowing();
     }
-  }, [wallet]);
+  }, [wallet, username]);
 
   // functions as both a follow and unfollow (if the current user is already following them)
   function follow(wallet, username) {
@@ -64,11 +66,19 @@ export default function Users({user, nfts}) {
     });
   }
 
+
   const buttonTitle = isFollowing ? "Unfollow" : "Follow";
 
   if (!selectedUser) {
     return <Text>Loading...</Text>;
   }
+
+
+  if (!!wallet && wallet == selectedUser.wallet) {
+    router.push('/profile')
+  }
+  console.log('wallettt', wallet)
+  console.log('user wallet', selectedUser.wallet)
 
   return (
     <>
@@ -137,7 +147,7 @@ export default function Users({user, nfts}) {
       </Stack>
       <Divider />
 
-      {!!nfts && nfts.length && display === "NFT" ? (
+      {/* {!!nfts && nfts.length && display === "NFT" ? (
         <Container
           maxW={1100}
           display="flex"
@@ -191,8 +201,8 @@ export default function Users({user, nfts}) {
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
-        >
-          {selectedUser.posts.map((p) => (
+        > */}
+          {/* {selectedUser.posts.map((p) => (
             <Box key={p.id} w={400} borderWidth={1} mt={5}>
               <Stack direction="row" display="flex" alignItems="center">
                 <Image
@@ -213,11 +223,12 @@ export default function Users({user, nfts}) {
                 {p.content}
               </Text>
             </Box>
-          ))}
+          ))} */}
+          {/* <SocialCard posts={selectedUser.posts} />
         </Container>
       ) : display === "NFT" ? null : (
         <Text textAlign="center">~ no posts to display ~</Text>
-      )}
+      )} */}
     </>
   );
 }
