@@ -17,6 +17,7 @@ export const fetchSelectedUser = createAsyncThunk(
   'selectedUser/fetchSelectedUser',
   async (username) => {
     try {
+      console.log('usernameeee', username)
       const {data: user} = await axios.get(`/api/users/${username}`)
       return user
     } catch (err) {
