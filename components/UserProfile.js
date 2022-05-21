@@ -11,7 +11,6 @@ import {
   Spinner,
   Alert,
   AlertIcon,
-  Grid,
   GridItem as Gi,
 } from "@chakra-ui/react";
 import { fetchUser } from "../store/userSlice";
@@ -34,6 +33,7 @@ export default function UserProfile() {
   const { nfts } = useSelector((state) => state.nfts);
   const [hidden, setHidden] = useState(false);
   const [display, setDisplay] = useState("NFT"); // switch bw post and nft
+  const { AllPost: post, status } = useSelector((state) => state.socialPost);
 
   useEffect(() => {
     if (address) {
@@ -41,7 +41,7 @@ export default function UserProfile() {
       getAllUsernames();
       dispatch(fetchNfts(address));
     }
-  }, [address]);
+  }, [address, post]);
 
   // using this to compare usernames when editing and set up error handling
   async function getAllUsernames() {
@@ -142,10 +142,10 @@ export default function UserProfile() {
     } */}
 
     {display === "NFT" ? <ProfileNfts nfts={nfts} hidden={hidden} toggle={toggle} setHidden={setHidden}/> : display === "POST" ? (
+      <Box display='flex' justifyContent='center'>
         <SocialCard posts={user.posts} />
-    )
-
-    : null}
+      </Box>
+    ) : null}
       {display === "COLLECTION" && user.collections.length ?
       <CollectionList collections={user.collections} /> :
       display === "COLLECTION" && user.collections.length === 0 ?

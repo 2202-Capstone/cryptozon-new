@@ -107,6 +107,7 @@ export const SocialCard = (props) => {
   // }
   if (!!props.posts) {
     tempPost = [...props.posts]
+    tempPost.sort((a,b) => b.id - a.id)
   } else {
     if (!!post) {
       tempPost = [...post];
@@ -116,7 +117,11 @@ export const SocialCard = (props) => {
     <Box display="flex" flexDirection="column" align="center" gap="4">
       {/* {!!address ? 'wallet connected ':'wallet not connected '} */}
       {!!walletUser.username ? "" : "Not logged in viewing as a guest"}
-      {!!walletUser.username ? <Addpost /> : null}
+      {/* {!!walletUser.username ? <Addpost /> : null} */}
+      {!!props.user ? null :
+      !!walletUser.username ? <Addpost /> :
+      null
+      }
       <CommentModal
         open={open}
         closeFunc={closeModal}
