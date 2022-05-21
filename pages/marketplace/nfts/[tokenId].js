@@ -1,36 +1,22 @@
-// cryptozon.com/marketplace/nfts/[tokenID]
-//useRouter hook next/router
-//will use same NFTActiveItem component for single NFT display
-//tokenId is the id of the NFT
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+// import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import NFTSingleItem from "../../../components/marketplace/NFTSingleItem";
 
-// export const getServerSideProps = async (context) => {
-//   return {
-//     props: {}
-//   }
-// }
-
-
-
-
 const NFTDetails = () => {
+  const router = useRouter();
   const { activeNfts } = useSelector((store) => store);
   const activeNow = activeNfts.activeNfts[0];
   const singleNFTData = []
   if(!!activeNow)
   {
     singleNFTData = activeNow.filter((nft) => {
-    const URL_PREFIX = "http://localhost:3000/marketplace/nfts/";
-    const WINDOW_URL = window.location.href;
-    const testURL = URL_PREFIX + nft.tokenId
-    if (WINDOW_URL == testURL) {
-      // console.log(nft);
+    const tokenCheck = router.query.tokenId
+    if (tokenCheck == nft.tokenId) {
       return nft;
     }
   })}
-  console.log('singlenftdata: ',singleNFTData[0])
+  // console.log('singlenftdata: ',singleNFTData[0])
   if(!!singleNFTData[0]){
     const { name, description, image } = singleNFTData[0].asset;
     const { id, buyoutPrice, tokenId } = singleNFTData[0];

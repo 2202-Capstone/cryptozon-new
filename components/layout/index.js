@@ -49,7 +49,7 @@ export default function Layout({ children }) {
   const getAllActiveListings = async () => {
     try {
       const nftList = await marketplace.getActiveListings();
-      console.log(nftList);
+      // console.log(nftList);
       setAllActiveListings(nftList);
       dispatch(setActiveNft(nftList));
     } catch (error) {
