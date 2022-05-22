@@ -103,7 +103,7 @@ export default function EditProfile({ user, wallet, usernames }) {
             />
             <FormControl>
               <FormLabel>Username</FormLabel>
-              <Input value={username} onChange={checkUsername} />
+              <Input value={username} onChange={checkUsername} maxLength={19}/>
               {isError && username === "" ? (
                 <Text color="#ff4d4d">Username cannot be empty!</Text>
               ) : isError ? (
