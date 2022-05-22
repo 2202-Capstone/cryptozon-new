@@ -40,8 +40,10 @@ export default function Users() {
   useEffect(() => {
     dispatch(fetchSelectedUser(router.query.username));
     if (selectedUserWallet) {
-      checkIfFollowing();
       dispatch(fetchNfts(selectedUserWallet));
+      if (wallet) {
+        checkIfFollowing();
+      }
     }
   }, [wallet, username, selectedUserWallet, post]);
 
@@ -106,13 +108,13 @@ export default function Users() {
                   mr={4}
                   _hover={{ cursor: "pointer", opacity: "0.8" }}
                 /> */}
-                <Button
+                {!!wallet ? <Button
                   w={100}
                   borderRadius={50}
                   onClick={() => follow(wallet, selectedUser.username)}
                 >
                   {buttonTitle}
-                </Button>
+                </Button> : null}
               </Box>
             </Stack>
             <Text mt={5}>{selectedUser.bio}</Text>

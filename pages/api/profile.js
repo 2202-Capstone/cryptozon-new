@@ -31,6 +31,10 @@ export default async function handler(req, res) {
         where: {
           wallet: wallet,
         },
+        include: [
+          {model: Post, include: [{model: User}, {model: LikePost},{model: Comments, include: [{model: User}, {model: LikeComments}]}]},
+          {model: Collections, include: {model: User}}
+        ]
       });
       await updateUser.update(req.body);
       return res.status(200).send(updateUser);

@@ -122,13 +122,13 @@ export default function UserProfile() {
         justifyContent="center"
         mb={2}
       >
-        <Button variant="ghost" onClick={() => setDisplay("NFT")}>
+        <Button variant="ghost" onClick={() => setDisplay("NFT")} disabled={!user.username ? true : false}>
           NFTs
         </Button>
-        <Button variant="ghost" onClick={() => setDisplay("POST")}>
+        <Button variant="ghost" onClick={() => setDisplay("POST")} disabled={!user.username ? true : false}>
           Posts
         </Button>
-        <Button variant="ghost" onClick={() => setDisplay("COLLECTION")}>
+        <Button variant="ghost" onClick={() => setDisplay("COLLECTION")} disabled={!user.username ? true : false}>
           Collections
         </Button>
       </Stack>
