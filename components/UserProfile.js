@@ -40,7 +40,7 @@ export default function UserProfile() {
       getAllUsernames();
       dispatch(fetchNfts(address));
     }
-  }, [address, post]);
+  }, [address, post, dispatch]);
 
   // using this to compare usernames when editing and set up error handling
   async function getAllUsernames() {
