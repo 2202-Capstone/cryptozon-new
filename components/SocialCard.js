@@ -14,6 +14,7 @@ import {
   unlikeItem,
   commentPost,
   textToImage,
+  deletePost
 } from "../store/post";
 import CommentModal from "./CommentModal";
 import { MdVerified } from "react-icons/md";
@@ -29,6 +30,7 @@ import { fetchUser } from "../store/userSlice";
 import Addpost from "./Addpost";
 import Link from "next/link";
 import { MinusIcon } from "@chakra-ui/icons";
+import DeletePost from "./DeletePost";
 
 export const SocialCard = (props) => {
   const address = useAddress();
@@ -102,6 +104,9 @@ export const SocialCard = (props) => {
   const alertToLogin = () => {
     alert("Please Log In with your wallet!");
   };
+  const deleteUserPost = (postToDelete) => {
+    dispatch(deletePost(postToDelete))
+  }
   let tempPost = [];
   // if (!!post) {
   //   tempPost = [...post];
@@ -118,7 +123,6 @@ export const SocialCard = (props) => {
     <Box display="flex" flexDirection="column" align="center" gap="4">
       {/* {!!address ? 'wallet connected ':'wallet not connected '} */}
       {!!walletUser.username ? "" : "Not logged in viewing as a guest"}
-      {/* {!!walletUser.username ? <Addpost /> : null} */}
       {!!props.user ? null :
       !!walletUser.username ? <Addpost /> :
       null
@@ -156,7 +160,7 @@ export const SocialCard = (props) => {
                 border="1px solid"
                 borderColor={borderClr}
               >
-                <Link key={user.username} href={`/${user.username}`} passHref>
+                {/* <Link key={user.username} href={`/${user.username}`} passHref>
                   <Box
                     display="flex"
                     alignItems="center"
@@ -175,8 +179,8 @@ export const SocialCard = (props) => {
                     <Box>{user.username}</Box>
                     <Icon fill="cyan.500" as={MdVerified} />
                   </Box>
-                </Link>
-                 {/* <Box
+                </Link> */}
+                 <Box
                     display="flex"
                     alignItems="center"
                     gap="1"
@@ -196,9 +200,8 @@ export const SocialCard = (props) => {
                     <Icon fill="cyan.500" as={MdVerified} ml={1}/>
                     </Box>
                     </Link>
-                    {!!props.me ? <MinusIcon ml={370}/> : null}
-                  </Box> */}
-
+                    {!!props.me ? <DeletePost post={singlePostData} deleteUserPost={deleteUserPost}/> : null}
+                  </Box>
 
                 {postImage ? (
                   <Box>

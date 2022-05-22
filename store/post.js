@@ -92,6 +92,17 @@ export const textToImage = async () => {
       }
 }
 
+export const deletePost = createAsyncThunk(
+  'post/deletePost',
+  async (postToDelete, {dispatch}) => {
+    try {
+      await axios.delete('/api/post', {data: postToDelete})
+      return dispatch(fetchAllPost())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+)
 
 export const postSlice = createSlice({
     name: "post",
@@ -109,7 +120,7 @@ export const postSlice = createSlice({
         state.status = "rejected";
         state.error = action.payload;
       },
-      }
+    }
 })
 
 export const postReducer = postSlice.reducer;

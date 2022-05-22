@@ -9,7 +9,6 @@ import {
   Divider,
   Stack,
 } from "@chakra-ui/react";
-import { ChatIcon } from "@chakra-ui/icons";
 import { followUser } from "../store/selectedUser";
 import { useDispatch, useSelector } from "react-redux";
 import { useAddress } from "@thirdweb-dev/react";
@@ -103,10 +102,10 @@ export default function Users() {
                 @{selectedUser.username}
               </Text>
               <Box>
-                <ChatIcon
+                {/* <ChatIcon
                   mr={4}
                   _hover={{ cursor: "pointer", opacity: "0.8" }}
-                />
+                /> */}
                 <Button
                   w={100}
                   borderRadius={50}

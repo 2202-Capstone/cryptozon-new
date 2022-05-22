@@ -8,13 +8,16 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import CollectionDetails from "./CollectionDetails";
+import Link from "next/link";
+
 export default function CollectionItem({ coll }) {
   const boxShadow = useColorModeValue(
     "md",
     "0px 3px 7px rgba(255,255,255,0.2)"
   );
   return (
-    <NextLink href={`collections/${coll.slug}`} passHref>
+    // <NextLink href={`collections/${coll.slug}`} passHref>
+    <Link href={`/marketplace/collections/${coll.slug}`} passHref>
       <Gi
         as={Grid}
         boxShadow={boxShadow}
@@ -31,6 +34,6 @@ export default function CollectionItem({ coll }) {
           marginTitle="2.7rem"
         />
       </Gi>
-    </NextLink>
+    </Link>
   );
 }

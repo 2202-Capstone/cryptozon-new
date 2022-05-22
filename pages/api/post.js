@@ -49,6 +49,14 @@ export default async function handler(req,res){
             }
             res.status(200).end()
             break;
+        case 'DELETE':
+            const postToDelete = await Post.findOne({
+                where: {
+                    id: req.body.id
+                }
+            })
+            await postToDelete.destroy()
+            res.status(200).end()
         default:
             break;
     }

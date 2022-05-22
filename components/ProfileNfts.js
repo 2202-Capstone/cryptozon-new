@@ -1,11 +1,18 @@
 import React from "react";
-import { Container, Box, Divider, Image, Button, Text, Tooltip } from "@chakra-ui/react";
+import {
+  Container,
+  Box,
+  Divider,
+  Image,
+  Button,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
-  const isEmpty = nfts.length === 0 ? true : false
-  const iconHover = hidden === true ? 'Display NFT' : 'Hide NFT';
-  console.log('dataaa',nfts.data)
+  const isEmpty = nfts.length === 0 ? true : false;
+  const iconHover = hidden === true ? "Display NFT" : "Hide NFT";
 
   return (
     <>
@@ -49,7 +56,7 @@ export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
                   overflow="hidden"
                   m="10px"
                   maxW="290px"
-                  shadow='md'
+                  shadow="md"
                 >
                   <Image src={nft.image} alt={nft.name} w="290px" h="260px" />
                   <Box p="6">
@@ -73,7 +80,7 @@ export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
           </Box>
         </Container>
       ) : (
-        <Text textAlign='center'>~ no nfts to display ~</Text>
+        <Text textAlign="center">~ no nfts to display ~</Text>
       )}
     </>
   );

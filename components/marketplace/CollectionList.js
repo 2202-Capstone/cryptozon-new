@@ -1,8 +1,9 @@
 import React from "react";
 import { Grid } from "@chakra-ui/react";
 import CollectionItem from "./CollectionItem";
+
 export default function CollectionList({ collections }) {
-  collections = collections.filter((el) => !!el.nfts.length);
+  // collections = collections.filter((el) => !!el.nfts.length);
   return (
     <Grid
       templateColumns="repeat(auto-fill, 24rem)"
