@@ -14,11 +14,12 @@ import {
   unlikeItem,
   commentPost,
   textToImage,
-  deletePost
+  deletePost,
 } from "../store/post";
 import CommentModal from "./CommentModal";
 import { MdVerified } from "react-icons/md";
 import SocialPostComments from "./SocialPostComments";
+import SocialPostTextContent from "./SocialPostTextContent";
 import {
   FaRegComment,
   FaRegShareSquare,
@@ -105,15 +106,15 @@ export const SocialCard = (props) => {
     alert("Please Log In with your wallet!");
   };
   const deleteUserPost = (postToDelete) => {
-    dispatch(deletePost(postToDelete))
-  }
+    dispatch(deletePost(postToDelete));
+  };
   let tempPost = [];
   // if (!!post) {
   //   tempPost = [...post];
   // }
   if (!!props.posts) {
-    tempPost = [...props.posts]
-    tempPost.sort((a,b) => b.id - a.id)
+    tempPost = [...props.posts];
+    tempPost.sort((a, b) => b.id - a.id);
   } else {
     if (!!post) {
       tempPost = [...post];
@@ -123,10 +124,7 @@ export const SocialCard = (props) => {
     <Box display="flex" flexDirection="column" align="center" gap="4">
       {/* {!!address ? 'wallet connected ':'wallet not connected '} */}
       {!!walletUser.username ? "" : "Not logged in viewing as a guest"}
-      {!!props.user ? null :
-      !!walletUser.username ? <Addpost /> :
-      null
-      }
+      {!!props.user ? null : !!walletUser.username ? <Addpost /> : null}
       <CommentModal
         open={open}
         closeFunc={closeModal}
@@ -180,28 +178,28 @@ export const SocialCard = (props) => {
                     <Icon fill="cyan.500" as={MdVerified} />
                   </Box>
                 </Link> */}
-                 <Box
-                    display="flex"
-                    alignItems="center"
-                    gap="1"
-                    p="2"
-                  >
-                    <Link key={user.username} href={`/${user.username}`} passHref>
-                      <Box display='flex' alignItems='center' cursor='pointer'>
-                    <Image
-                      padding="2px"
-                      margin="2px"
-                      borderRadius="full"
-                      boxSize="50px"
-                      alt=""
-                      src={user.imageUrl}
-                    />
-                    <Box ml={2}>{user.username}</Box>
-                    <Icon fill="cyan.500" as={MdVerified} ml={1}/>
+                <Box display="flex" alignItems="center" gap="1" p="2">
+                  <Link key={user.username} href={`/${user.username}`} passHref>
+                    <Box display="flex" alignItems="center" cursor="pointer">
+                      <Image
+                        padding="2px"
+                        margin="2px"
+                        borderRadius="full"
+                        boxSize="50px"
+                        alt=""
+                        src={user.imageUrl}
+                      />
+                      <Box ml={2}>{user.username}</Box>
+                      <Icon fill="cyan.500" as={MdVerified} ml={1} />
                     </Box>
-                    </Link>
-                    {!!props.me ? <DeletePost post={singlePostData} deleteUserPost={deleteUserPost}/> : null}
-                  </Box>
+                  </Link>
+                  {!!props.me ? (
+                    <DeletePost
+                      post={singlePostData}
+                      deleteUserPost={deleteUserPost}
+                    />
+                  ) : null}
+                </Box>
 
                 {postImage ? (
                   <Box>
@@ -304,14 +302,10 @@ export const SocialCard = (props) => {
                   </Fr>
                 )}
                 {postImage ? (
-                  <Box display="flex" pt="1" px="4" pb="1">
-                    <Text>
-                      <Text as="span" fontWeight="bold">
-                        {user.username}{" "}
-                      </Text>
-                      {content}
-                    </Text>
-                  </Box>
+                  <SocialPostTextContent
+                    username={user.username}
+                    content={content}
+                  />
                 ) : null}
                 <SocialPostComments
                   tempComments={tempComments}
