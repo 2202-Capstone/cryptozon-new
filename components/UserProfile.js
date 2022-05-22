@@ -21,7 +21,6 @@ import EditProfile from "./EditProfile";
 import Link from "next/link";
 import axios from "axios";
 import ProfileNfts from "./ProfileNfts";
-import ProfilePosts from "./ProfilePosts";
 import CollectionList from "./marketplace/CollectionList";
 import SocialCard from "./SocialCard";
 
