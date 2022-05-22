@@ -146,7 +146,7 @@ export default function UserProfile() {
         </Box>
       ) : null}
       {display === "COLLECTION" && user.collections.length ? (
-        <CollectionList collections={user.collections} />
+        <CollectionList collections={user.collections} isProfile={true} />
       ) : display === "COLLECTION" && user.collections.length === 0 ? (
         <Text textAlign="center">~ no collections to display ~</Text>
       ) : null}
