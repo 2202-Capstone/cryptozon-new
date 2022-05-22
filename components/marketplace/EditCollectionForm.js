@@ -77,11 +77,16 @@ export default function EditCollectionForm({
       if (profilePic.name) profileUrl = await uploadImage(profilePic);
       if (bannerPic.name) bannerUrl = await uploadImage(bannerPic);
 
+      let finalBanner = "";
+      if (bannerUrl.trim()) finalBanner = bannerUrl;
+      else if (typeof bannerPic === "string" || bannerPic?.name)
+        finalBanner = bannerPic;
+
       await axios.patch(`/api/collections/${slug}`, {
         name: nameInput,
         description: descriptionInput.trim(),
         profileImg: profileUrl || profilePic,
-        bannerImg: bannerUrl ? bannerUrl : bannerPic.name ? bannerPic : "",
+        bannerImg: finalBanner,
       });
       setLoadingColl(false);
       toast({

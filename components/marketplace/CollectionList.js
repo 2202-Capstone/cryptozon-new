@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@chakra-ui/react";
 import CollectionItem from "./CollectionItem";
 
-export default function CollectionList({ collections }) {
+export default function CollectionList({ collections, isProfile = false }) {
   // collections = collections.filter((el) => !!el.nfts.length);
   return (
     <Grid
@@ -12,7 +12,9 @@ export default function CollectionList({ collections }) {
       justifyContent="center"
     >
       {!!collections.length &&
-        collections.map((coll) => <CollectionItem key={coll.id} coll={coll} />)}
+        collections.map((coll) => (
+          <CollectionItem key={coll.id} coll={coll} isProfile={isProfile} />
+        ))}
     </Grid>
   );
 }
