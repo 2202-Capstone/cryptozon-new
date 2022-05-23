@@ -8,14 +8,13 @@ import {
   Button,
   useColorMode,
   IconButton,
-  Tooltip
+  Avatar,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../store/userSlice";
-import { Avatar } from '@chakra-ui/react'
 
 const DarkModeSwitch = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -24,7 +23,7 @@ const DarkModeSwitch = () => {
   const connectWithMetamask = useMetamask();
   const router = useRouter();
   const dispatch = useDispatch();
-  const {user} = useSelector(state => state.user)
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (address) {
@@ -36,7 +35,7 @@ const DarkModeSwitch = () => {
     <Flex w="100%">
       <Flex align="center" width="100%" justifyContent="flex-end" px="8">
         <Flex display={["none", "none", "flex"]} gap="3" mr="2" align="center">
-        <Link href="/post" passHref>
+          <Link href="/post" passHref>
             <Button
               as={ChakraLink}
               variant="ghost"
@@ -83,7 +82,11 @@ const DarkModeSwitch = () => {
                 >
                   Profile
                 </Button> */}
-                <Avatar name={user.username} src={user.iamgeUrl} style={{cursor: 'pointer'}}/>
+                <Avatar
+                  name={user.username}
+                  src={user.imageUrl}
+                  style={{ cursor: "pointer" }}
+                />
               </Link>
             </Fr>
           ) : null}
