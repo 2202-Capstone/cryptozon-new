@@ -1,5 +1,6 @@
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import store from "../store";
+import Head from "next/head";
 import { Provider } from "react-redux";
 import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react"; // for chakra;
 import Layout from "../components/layout";
@@ -22,6 +23,9 @@ function MyApp({ Component, pageProps }) {
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <ChakraProvider theme={theme}>
           <Layout>
+            <Head>
+              <title>Cryptozon</title>
+            </Head>
             <Component {...pageProps} />
           </Layout>
         </ChakraProvider>

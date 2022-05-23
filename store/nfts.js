@@ -12,7 +12,8 @@ export const fetchNfts = createAsyncThunk(
   "nfts/fetchNfts",
   async (wallet) => {
     try {
-      const {data: nfts} = await axios.get(`/api/nfts?owner=${wallet}`)
+      const {data: nfts} = await axios.get(`/api/moralis/nfts?address=${wallet}`)
+      console.log(nfts)
       return nfts;
     } catch (error) {
       console.log(error)
