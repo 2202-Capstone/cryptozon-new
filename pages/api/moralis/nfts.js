@@ -11,8 +11,34 @@ export default async function handler(req,res){
         case 'GET':
             console.log(body)
             await Moralis.start({ serverUrl, appId, masterKey });
-            const ownedNFTs = await Moralis.Web3API.account.getNFTs({address:body.address, chain:'rinkeby'})
-            res.status(200).send(ownedNFTs.result)
+            const ownedNFTs = await Moralis.Web3API.account.getNFTs({address:query.address, chain:'rinkeby'})
+            const structuredData = ownedNFTs.result.map((nftData,ind) =>{
+                console.log(JSON.parse(nftData.metadata))
+                const metadata = JSON.parse(nftData.metadata)
+                const imageIPFT = metadata.image.split('').slice(7).join('')
+
+                console.log('sliced:',imageIPFT, ' prev: ',metadata.image)
+                const imageUrl = `https://cryptozon.infura-ipfs.io/ipfs/${imageIPFT}`
+                console.log(imageUrl)
+                return {
+                    assetContractAddress: nftData.token_address,
+                    buyoutPrice: null,
+                    collectionId: null,
+                    createdAt: nftData.synced_at,
+                    description: metadata.description,
+                    expirationDate: null,
+                    hidden: false,
+                    id: ind,
+                    image: imageUrl,
+                    listingId: null,
+                    name: metadata.name,
+                    owner: nftData.owner_of,
+                    tokenId: nftData.token_id,
+                    updatedAt: nftData.last_token_uri_sync,
+                    uri: nftData.token_uri,
+                }
+            })
+            res.status(200).send({status:"success",data:structuredData})
             break;
         default:
             res.status(500).end();
