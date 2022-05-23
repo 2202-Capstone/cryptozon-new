@@ -247,26 +247,6 @@ export const SocialCard = (props) => {
                       </Text>{" "}
                       likes
                     </Box>
-                    {!!isNFT.trim() && (
-                      <Tooltip
-                        hasArrow
-                        label="This is the contract address of the NFT."
-                      >
-                        <Text
-                          textAlign="left"
-                          mx="4"
-                          fontStyle="italic"
-                          fontSize="sm"
-                          transform="translateY(2px)"
-                          display="flex"
-                          alignItems="center"
-                          cursor="default"
-                        >
-                          {`${isNFT}`}{" "}
-                          <Icon fill="cyan.500" as={MdVerified} ml={1} />
-                        </Text>
-                      </Tooltip>
-                    )}
                   </Fr>
                 ) : (
                   <Fr>
@@ -302,6 +282,26 @@ export const SocialCard = (props) => {
                       likes
                     </Box>
                   </Fr>
+                )}
+                {!!isNFT.trim() && (
+                  <Tooltip
+                    hasArrow
+                    label="This is the contract address of the NFT."
+                  >
+                    <Text
+                      textAlign="left"
+                      mx="4"
+                      fontStyle="italic"
+                      fontSize="sm"
+                      transform="translateY(2px)"
+                      display="flex"
+                      alignItems="center"
+                      cursor="default"
+                    >
+                      {`${isNFT}`}{" "}
+                      <Icon fill="cyan.500" as={MdVerified} ml={1} />
+                    </Text>
+                  </Tooltip>
                 )}
                 {postImage ? (
                   <SocialPostTextContent

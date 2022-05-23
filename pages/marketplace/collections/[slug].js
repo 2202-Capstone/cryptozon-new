@@ -2,14 +2,8 @@ import React, { useEffect, Fragment as Fr } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCollection } from "../../../store/collections";
-import {
-  Text,
-  Container,
-  Grid,
-  GridItem as Gi,
-  Heading,
-  Divider,
-} from "@chakra-ui/react";
+import { Text, Container, Grid, Heading, Divider } from "@chakra-ui/react";
+import Head from "next/head";
 import CollectionDetails from "../../../components/marketplace/CollectionDetails";
 import NFTList from "../../../components/marketplace/NFTList";
 export default function SingleCollectionPage() {
@@ -26,6 +20,9 @@ export default function SingleCollectionPage() {
   if (!singleCollection.id) return <Text>Not found</Text>;
   return (
     <Fr>
+      <Head>
+        <title>{singleCollection.name} | Cryptozon</title>
+      </Head>
       <Grid mt={4} justifyItems="center">
         <CollectionDetails
           coll={singleCollection}

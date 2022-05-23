@@ -1,5 +1,6 @@
 import React, { useState, useRef, Fragment as Fr } from "react";
 import axios from "axios";
+import Head from "next/head";
 import NextLink from "next/link";
 import {
   Container,
@@ -121,74 +122,83 @@ export default function CreateNFTPage() {
   };
 
   return (
-    <Container maxW="container.sm">
-      <VStack spacing={3} as="form" onSubmit={handleSubmit} ref={formRef}>
-        <Heading mb={4}>Create your NFT!</Heading>
-        <ImageInput image={image} setImage={setImage} />
-        <FormControl>
-          <FormLabel htmlFor="name">Name</FormLabel>
-          <Input name="name" id="name" type="text" />
-        </FormControl>
-        <FormControl>
-          <FormLabel htmlFor="description">Description</FormLabel>
-          <Input name="description" id="description" type="text" />
-        </FormControl>
-        <FormControl>
-          <FormLabel htmlFor="supply">Supply</FormLabel>
-          <Input
-            name="supply"
-            id="supply"
-            type="number"
-            value={1}
-            isReadOnly={true}
-          />
-        </FormControl>
-        {/** this collection input is still for display. once the collection api route is running we could use it */}
-        <FormControl pb={2}>
-          {user.user.collections && !!user.user.collections.length ? (
-            <Fr>
-              <FormLabel htmlFor="collection">Collection</FormLabel>
-              <Select name="collection" id="collection" defaultValue="default">
-                <option value="default" disabled>
-                  Collection
-                </option>
-                {user.user.collections.map((el) => (
-                  <option key={el.id} value={el.id}>
-                    {el.name}
-                  </option>
-                ))}
-              </Select>
-            </Fr>
-          ) : (
-            <Fr>
-              <NextLink href="/marketplace/collections/create" passHref>
-                <Text
-                  fontSize="lg"
-                  cursor="pointer"
-                  textTransform="uppercase"
-                  color="red"
-                  textDecoration="underline"
+    <Fr>
+      <Head>
+        <title>Create an NFT | Cryptozon</title>
+      </Head>
+      <Container maxW="container.sm">
+        <VStack spacing={3} as="form" onSubmit={handleSubmit} ref={formRef}>
+          <Heading mb={4}>Create your NFT!</Heading>
+          <ImageInput image={image} setImage={setImage} />
+          <FormControl>
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <Input name="name" id="name" type="text" />
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="description">Description</FormLabel>
+            <Input name="description" id="description" type="text" />
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="supply">Supply</FormLabel>
+            <Input
+              name="supply"
+              id="supply"
+              type="number"
+              value={1}
+              isReadOnly={true}
+            />
+          </FormControl>
+          {/** this collection input is still for display. once the collection api route is running we could use it */}
+          <FormControl pb={2}>
+            {user.user.collections && !!user.user.collections.length ? (
+              <Fr>
+                <FormLabel htmlFor="collection">Collection</FormLabel>
+                <Select
+                  name="collection"
+                  id="collection"
+                  defaultValue="default"
                 >
-                  Please create a collection first! Click here.
-                </Text>
-              </NextLink>
-            </Fr>
-          )}
-        </FormControl>
+                  <option value="default" disabled>
+                    Collection
+                  </option>
+                  {user.user.collections.map((el) => (
+                    <option key={el.id} value={el.id}>
+                      {el.name}
+                    </option>
+                  ))}
+                </Select>
+              </Fr>
+            ) : (
+              <Fr>
+                <NextLink href="/marketplace/collections/create" passHref>
+                  <Text
+                    fontSize="lg"
+                    cursor="pointer"
+                    textTransform="uppercase"
+                    color="red"
+                    textDecoration="underline"
+                  >
+                    Please create a collection first! Click here.
+                  </Text>
+                </NextLink>
+              </Fr>
+            )}
+          </FormControl>
 
-        <Button
-          colorScheme="cyan"
-          color={btnColor}
-          alignSelf="flex-start"
-          type="submit"
-          isDisabled={
-            mintStatus === "loading" ||
-            (user.user.collections && !user.user.collections.length)
-          }
-        >
-          {mintStatus === "loading" ? <Spinner /> : "Create"}
-        </Button>
-      </VStack>
-    </Container>
+          <Button
+            colorScheme="cyan"
+            color={btnColor}
+            alignSelf="flex-start"
+            type="submit"
+            isDisabled={
+              mintStatus === "loading" ||
+              (user.user.collections && !user.user.collections.length)
+            }
+          >
+            {mintStatus === "loading" ? <Spinner /> : "Create"}
+          </Button>
+        </VStack>
+      </Container>
+    </Fr>
   );
 }

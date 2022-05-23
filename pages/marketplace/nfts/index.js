@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Fragment as Fr } from "react";
 import { Box, Heading, Flex } from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux";
+import Head from "next/head";
+import { useSelector } from "react-redux";
 import NFTActiveItem from "../../../components/marketplace/NFTActiveItem";
-import Link from "next/link";
 
 const Marketplace = () => {
   const { activeNfts } = useSelector((store) => store);
@@ -10,25 +10,29 @@ const Marketplace = () => {
 
   useEffect(() => {
     setIsLoading(false);
-  },[]);
+  }, []);
 
   return (
-    <Box px="12">
-      <Heading textAlign="center" mb="8">
-        Cryptozon Market
-      </Heading>
-      {isLoading ? (
-        <div>Loading</div>
-      ) : (
-        <Flex gap="8" wrap="wrap" justifyContent={"center"}>
-          {activeNfts.activeNfts.length > 0 ? (
-            activeNfts.activeNfts[0].map((nft) => {
-              const { name, description, image } = nft.asset;
-              const { id, buyoutPrice, tokenId } = nft;
-              const price = buyoutPrice / 1e18;
-              // console.log("nft", tokenId);
+    <Fr>
+      <Head>
+        <title>Shop | Cryptozon</title>
+      </Head>
+      <Box px="12">
+        <Heading textAlign="center" mb="8">
+          Cryptozon Market
+        </Heading>
+        {isLoading ? (
+          <div>Loading</div>
+        ) : (
+          <Flex gap="8" wrap="wrap" justifyContent={"center"}>
+            {activeNfts.activeNfts.length > 0 ? (
+              activeNfts.activeNfts[0].map((nft) => {
+                const { name, description, image } = nft.asset;
+                const { id, buyoutPrice, tokenId } = nft;
+                const price = buyoutPrice / 1e18;
+                // console.log("nft", tokenId);
 
-              return (
+                return (
                   <NFTActiveItem
                     key={tokenId}
                     name={name}
@@ -38,14 +42,15 @@ const Marketplace = () => {
                     id={id}
                     tokenId={tokenId}
                   />
-              );
-            })
-          ) : (
-            <div>No listings</div>
-          )}
-        </Flex>
-      )}
-    </Box>
+                );
+              })
+            ) : (
+              <div>No listings</div>
+            )}
+          </Flex>
+        )}
+      </Box>
+    </Fr>
   );
 };
 

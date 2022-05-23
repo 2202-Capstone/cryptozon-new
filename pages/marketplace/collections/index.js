@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { Container, Heading, GridItem as Gi } from "@chakra-ui/react";
+import React, { useEffect, Fragment as Fr } from "react";
+import Head from "next/head";
+import { Container, Heading } from "@chakra-ui/react";
 import { fetchAllCollections } from "../../../store/collections";
 import { useDispatch, useSelector } from "react-redux";
 import CollectionList from "../../../components/marketplace/CollectionList";
@@ -12,12 +13,17 @@ export default function CollectionsPage() {
   }, [dispatch]);
 
   return (
-    <Container pt="3" maxW="container.xl">
-      <Heading mb={6} textAlign="center">
-        Explore Collections
-      </Heading>
-      <CollectionList collections={collections} />
-    </Container>
+    <Fr>
+      <Head>
+        <title>Collections | Cryptozon</title>
+      </Head>
+      <Container pt="3" maxW="container.xl">
+        <Heading mb={6} textAlign="center">
+          Explore Collections
+        </Heading>
+        <CollectionList collections={collections} />
+      </Container>
+    </Fr>
   );
 }
 
