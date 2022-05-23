@@ -139,6 +139,7 @@ export default function UserProfile() {
           hidden={hidden}
           toggle={toggle}
           setHidden={setHidden}
+          user={user}
         />
       ) : display === "POST" ? (
         <Box display="flex" justifyContent="center">

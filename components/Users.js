@@ -8,6 +8,7 @@ import {
   Flex,
   Divider,
   Stack,
+  Spinner
 } from "@chakra-ui/react";
 import { followUser } from "../store/selectedUser";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,11 +35,15 @@ export default function Users() {
   const { AllPost: post, status } = useSelector((state) => state.socialPost);
   const [isFollowing, setIsFollowing] = useState(false);
   const [display, setDisplay] = useState("NFT");
-  const username = !!selectedUser ? selectedUser.username : null;
+  // const username = !!selectedUser ? selectedUser.username : null;
+  const {username} = router.query
   const selectedUserWallet = !!selectedUser ? selectedUser.wallet : null;
+  console.log('nftsssss', nfts)
 
   useEffect(() => {
-    dispatch(fetchSelectedUser(router.query.username));
+    if (username) {
+      dispatch(fetchSelectedUser(router.query.username));
+    }
     if (selectedUserWallet) {
       dispatch(fetchNfts(selectedUserWallet));
       if (wallet) {
@@ -72,8 +77,12 @@ export default function Users() {
 
   const buttonTitle = isFollowing ? "Unfollow" : "Follow";
 
-  if (!selectedUser) {
-    return <Text>Loading...</Text>;
+  if (!username || !nfts.data) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Spinner size="xl" textAlign="center" />
+    </Box>
+    )
   }
 
   if (!!wallet && wallet == selectedUser.wallet) {
@@ -149,7 +158,7 @@ export default function Users() {
       </Stack>
       <Divider mb={7} />
 
-      {!!nfts && nfts.length && display === "NFT" ? (
+      {!!nfts && nfts.data.length && display === "NFT" ? (
         <Container
           maxW={1100}
           display="flex"

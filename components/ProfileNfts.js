@@ -10,9 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
+export default function ProfileNfts({ nfts, hidden, toggle, setHidden, user }) {
   const isEmpty = nfts.length === 0 ? true : false;
   const iconHover = hidden === true ? "Display NFT" : "Hide NFT";
+
 
   return (
     <>
@@ -23,7 +24,7 @@ export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Box
+          {user.username ? <Box
             w={100}
             textAlign="center"
             alignSelf="flex-start"
@@ -37,7 +38,7 @@ export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
             <Button variant="ghost" onClick={() => setHidden(true)}>
               Hidden
             </Button>
-          </Box>
+          </Box> : null}
           <Box
             flex={1}
             display="flex"
