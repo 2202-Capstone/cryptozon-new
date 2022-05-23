@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { newPost } from "../store/post";
 import PostModal from "./PostModal";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+
+
 
 export default function Addpost() {
+  const sdk = new ThirdwebSDK("rinkeby");
+  const contract = sdk.getNFTCollection(process.env.NFT_COLECTION_CONTRACT_ADDRESS);
   const { user: walletUser } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
@@ -18,6 +23,11 @@ export default function Addpost() {
   const closeModal = () => {
     setOpen(false);
     setData({})
+  }
+  const logNFTs = async () => {
+    const nfts = await contract.getAll();
+    const filteredNfts = nfts.filter(nft => nft.owner === walletUser.wallet)
+    console.log(filteredNfts);
   }
   const addPost = (userId,post,imgUrl) =>{
     const initialSubs = [userId]
