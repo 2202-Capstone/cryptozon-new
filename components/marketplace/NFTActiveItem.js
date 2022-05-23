@@ -11,7 +11,6 @@ import { useMarketplace } from "@thirdweb-dev/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-
 const NFTActiveItem = (props) => {
   const { name, image, price, id, tokenId } = props;
 
@@ -31,48 +30,43 @@ const NFTActiveItem = (props) => {
   };
 
   return (
-
-      <Box
-        boxShadow="lg"
-        borderRadius="10px"
-        overflow="hidden"
-        cursor="pointer"
-        border="1px solid"
-        borderColor="gray.300"
-      >
-        <Link key={tokenId} href={`nfts/${tokenId}`} passHref>
-          <Image src={image} alt="nft pic" objectFit="contain" boxSize="350px"/>
-        </Link>
-        <Grid templateColumns="repeat(2,1fr)" p="4">
-          <Gi>
-            <Text color="gray.500">{name}</Text>
-          </Gi>
-          <Gi justifySelf="end">
-            <Text color="gray.500">Price</Text>
-          </Gi>
-          <Gi>
-            <Text>Bean #8055</Text>
-          </Gi>
-          <Gi justifySelf="end">
-            <Text>
-              <Image
-                src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
-                alt="test"
-                boxSize="12.5px"
-                display="inline-block"
-              />{" "}
-              {price}
-            </Text>
-          </Gi>
-          <Gi>
-            <Button onClick={buyNFT}>Buy</Button>
-          </Gi>
-          <Gi gridColumn="span 2" justifySelf="end">
-            <Text>1 day left</Text>
-          </Gi>
-        </Grid>
-      </Box>
-
+    <Box
+      boxShadow="lg"
+      borderRadius="10px"
+      overflow="hidden"
+      cursor="pointer"
+      border="1px solid"
+      borderColor="gray.300"
+    >
+      <Link key={tokenId} href={`nfts/${tokenId}`} passHref>
+        <Image src={image} alt="nft pic" objectFit="contain" boxSize="350px" />
+      </Link>
+      <Grid templateColumns="repeat(2,1fr)" p="4">
+        <Gi>
+          <Text color="gray.500">{name}</Text>
+        </Gi>
+        <Gi justifySelf="end">
+          <Text color="gray.500">Price</Text>
+        </Gi>
+        <Gi>
+          <Text>Bean #8055</Text>
+        </Gi>
+        <Gi justifySelf="end">
+          <Text>
+            <Image
+              src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
+              alt="test"
+              boxSize="12.5px"
+              display="inline-block"
+            />{" "}
+            {price}
+          </Text>
+        </Gi>
+        <Gi justifySelf="right" gridColumn="1 / -1" mt="2">
+          <Button onClick={buyNFT}>Buy</Button>
+        </Gi>
+      </Grid>
+    </Box>
   );
 };
 
