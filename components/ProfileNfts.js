@@ -8,7 +8,7 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import ProfileNftsItem from "./ProfileNftsItem";
 
 export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
   const isEmpty = nfts.length === 0 ? true : false;
@@ -48,34 +48,12 @@ export default function ProfileNfts({ nfts, hidden, toggle, setHidden }) {
             {nfts.data
               .filter((n) => n.hidden === hidden)
               .map((nft) => (
-                <Box
-                  _hover={{ border: "1px solid black" }}
+                <ProfileNftsItem
                   key={nft.id}
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  m="10px"
-                  maxW="290px"
-                  shadow="md"
-                >
-                  <Image src={nft.image} alt={nft.name} w="290px" h="260px" />
-                  <Box p="6">
-                    <Box
-                      mt="1"
-                      fontWeight="semibold"
-                      as="h4"
-                      lineHeight="tight"
-                      isTruncated
-                      fontSize={20}
-                    >
-                      {nft.name}
-                    </Box>
-                    <Box>{nft.description}</Box>
-                    <Tooltip hasArrow label={iconHover}>
-                      <HamburgerIcon ml="225px" onClick={() => toggle(nft)} cursor='pointer'/>
-                    </Tooltip>
-                  </Box>
-                </Box>
+                  nft={nft}
+                  toggle={toggle}
+                  iconHover={iconHover}
+                />
               ))}
           </Box>
         </Container>
