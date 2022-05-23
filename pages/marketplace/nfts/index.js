@@ -9,8 +9,15 @@ const Marketplace = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(false);
-  }, []);
+    console.log(activeNfts.activeNfts.length);
+    let timer;
+    if (!activeNfts.activeNfts.length)
+      timer = setTimeout(() => setIsLoading(false), 8500);
+    if (activeNfts.activeNfts.length) setIsLoading(false);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [activeNfts.activeNfts.length]);
 
   return (
     <Fr>
@@ -22,13 +29,15 @@ const Marketplace = () => {
           Cryptozon Market
         </Heading>
         {isLoading ? (
-          <div>Loading</div>
+          <Box textAlign="center" fontSize="lg" fontWeight="bold">
+            Fetching listings from the blockchain...
+          </Box>
         ) : (
           <Flex gap="8" wrap="wrap" justifyContent={"center"}>
             {activeNfts.activeNfts.length > 0 ? (
               activeNfts.activeNfts[0].map((nft) => {
                 const { name, description, image } = nft.asset;
-                const { id, buyoutPrice, tokenId } = nft;
+                const { id, buyoutPrice, tokenId, sellerAddress } = nft;
                 const price = buyoutPrice / 1e18;
                 // console.log("nft", tokenId);
 
@@ -41,11 +50,14 @@ const Marketplace = () => {
                     price={price}
                     id={id}
                     tokenId={tokenId}
+                    sellerAddress={sellerAddress}
                   />
                 );
               })
             ) : (
-              <div>No listings</div>
+              <Box textAlign="center" fontSize="lg" fontWeight="bold">
+                No listings
+              </Box>
             )}
           </Flex>
         )}

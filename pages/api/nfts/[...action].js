@@ -24,7 +24,6 @@ const sellNFT = wrapAsync(async (req, res) => {
 });
 
 export default async function handler(req, res) {
-  console.log("hi");
   try {
     switch (req.method) {
       case "PATCH":

@@ -20,7 +20,7 @@ const NFTDetails = () => {
   // console.log('singlenftdata: ',singleNFTData[0])
   if (!!singleNFTData[0]) {
     const { name, description, image } = singleNFTData[0].asset;
-    const { id, buyoutPrice, tokenId } = singleNFTData[0];
+    const { id, buyoutPrice, tokenId, sellerAddress } = singleNFTData[0];
     const price = buyoutPrice / 1e18;
     return (
       <Fr>
@@ -35,6 +35,7 @@ const NFTDetails = () => {
           price={price}
           id={id}
           tokenId={tokenId}
+          sellerAddress={sellerAddress}
         />
       </Fr>
     );

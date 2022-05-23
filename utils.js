@@ -53,6 +53,20 @@ export const buyNFT = async (contract, nft, address) => {
     throw new Error(err.message);
   }
 };
+export const buyNFTInShop = async (contract, name, listingId, address) => {
+  try {
+    await contract.direct.buyoutListing(listingId, 1);
+    const {
+      data: { data },
+    } = await axios.get(`/api/nfts/${name}`);
+    await axios.patch(`/api/nfts/transfer/${data.id}`, {
+      owner: address,
+    });
+    return data.id;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 export const uploadImage = async (file) => {
   try {

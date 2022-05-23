@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Box,
   Image,
@@ -6,29 +6,64 @@ import {
   GridItem as Gi,
   Text,
   Button,
+  useToast,
+  Spinner,
 } from "@chakra-ui/react";
-import { useMarketplace } from "@thirdweb-dev/react";
+import { useMarketplace, useAddress } from "@thirdweb-dev/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { buyNFTInShop } from "../../utils";
+import { collectionActions } from "../../store/collections";
 
 const NFTActiveItem = (props) => {
-  const { name, image, price, id, tokenId } = props;
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+  const { name, image, price, id, tokenId, sellerAddress } = props;
 
+  const address = useAddress();
+  const dispatch = useDispatch();
   const marketplace = useMarketplace(
     process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS
   );
   const router = useRouter();
+
   const buyNFT = async () => {
     try {
-      await marketplace.buyoutListing(id, 1);
-      alert("NFT purchased");
-      router.push("/marketplace/nfts");
-    } catch (error) {
-      console.log(error);
-      alert("Error buying NFT");
+      setLoading(true);
+      const nftId = await buyNFTInShop(marketplace, name, id, address);
+      dispatch(
+        collectionActions.changeNFTOwner({ wallet: address, id: nftId })
+      );
+      setLoading(false);
+      toast({
+        title: "Bought NFT!",
+        description:
+          "You have successfully bought the nft. You can now view it in your profile.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      router.push("/profile");
+    } catch (err) {
+      console.log(err);
+      let errorMessage = "Something went wrong";
+      if (err.message.includes("wallet"))
+        errorMessage = "You are not connected to the wallet";
+      if (err.message.includes("insufficient funds"))
+        errorMessage = "You are low on funds.";
+      if (err.message.includes("denied"))
+        errorMessage = "You denied the transaction request.";
+      setLoading(false);
+      toast({
+        title: "Error buying nft",
+        description: errorMessage,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
-
   return (
     <Box
       boxShadow="lg"
@@ -43,13 +78,13 @@ const NFTActiveItem = (props) => {
       </Link>
       <Grid templateColumns="repeat(2,1fr)" p="4">
         <Gi>
-          <Text color="gray.500">{name}</Text>
+          <Text color="gray.500">NFT</Text>
         </Gi>
         <Gi justifySelf="end">
           <Text color="gray.500">Price</Text>
         </Gi>
         <Gi>
-          <Text>Bean #8055</Text>
+          <Text>{name}</Text>
         </Gi>
         <Gi justifySelf="end">
           <Text>
@@ -63,7 +98,11 @@ const NFTActiveItem = (props) => {
           </Text>
         </Gi>
         <Gi justifySelf="right" gridColumn="1 / -1" mt="2">
-          <Button onClick={buyNFT}>Buy</Button>
+          {address !== sellerAddress && (
+            <Button onClick={buyNFT} isDisabled={loading}>
+              {loading ? <Spinner /> : "Buy"}
+            </Button>
+          )}
         </Gi>
       </Grid>
     </Box>
