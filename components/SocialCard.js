@@ -7,6 +7,7 @@ import {
   useColorModeValue,
   GridItem as Gi,
   Icon,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   fetchAllPost,
@@ -142,6 +143,7 @@ export const SocialCard = (props) => {
               user,
               contentUri,
               likes_posts,
+              isNFT,
             } = singlePostData;
             let tempComments = [...comments];
 
@@ -265,6 +267,26 @@ export const SocialCard = (props) => {
                       </Text>{" "}
                       likes
                     </Box>
+                    {!!isNFT.trim() && (
+                      <Tooltip
+                        hasArrow
+                        label="This is the contract address of the NFT."
+                      >
+                        <Text
+                          textAlign="left"
+                          mx="4"
+                          fontStyle="italic"
+                          fontSize="sm"
+                          transform="translateY(2px)"
+                          display="flex"
+                          alignItems="center"
+                          cursor="default"
+                        >
+                          {`${isNFT}`}{" "}
+                          <Icon fill="cyan.500" as={MdVerified} ml={1} />
+                        </Text>
+                      </Tooltip>
+                    )}
                   </Fr>
                 ) : (
                   <Fr>

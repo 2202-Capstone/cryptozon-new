@@ -1,23 +1,27 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Post = db.define('post', {
+const Post = db.define("post", {
   content: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   postImage: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false,
   },
-  imageUrl:{
+  imageUrl: {
     type: Sequelize.TEXT,
-    defaultValue: '/assets/question.png'
+    defaultValue: "/assets/question.png",
   },
-  subscribedUsers:{
+  subscribedUsers: {
     type: Sequelize.JSON,
-  }
-})
+  },
+  isNFT: {
+    type: Sequelize.STRING,
+    defaultValue: "",
+  },
+});
 
 module.exports = Post;
