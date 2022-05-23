@@ -36,6 +36,3 @@ const User = db.define('user', {
 })
 
 module.exports = User;
-
-// folowing and followers might actually have to be an extra table
-// isUrl validation for imageUrl was messing up the edit profile pg

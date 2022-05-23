@@ -58,7 +58,6 @@ export const nftSlice = createSlice({
         }
         return n
       })
-      // shows two success in nft state kinda weird
       state.nfts = {data, status: 'success'}
       state.status = "success";
     },

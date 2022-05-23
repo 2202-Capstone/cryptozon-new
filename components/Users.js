@@ -8,7 +8,7 @@ import {
   Flex,
   Divider,
   Stack,
-  Spinner
+  Spinner,
 } from "@chakra-ui/react";
 import { followUser } from "../store/selectedUser";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,10 +35,8 @@ export default function Users() {
   const { AllPost: post, status } = useSelector((state) => state.socialPost);
   const [isFollowing, setIsFollowing] = useState(false);
   const [display, setDisplay] = useState("NFT");
-  // const username = !!selectedUser ? selectedUser.username : null;
-  const {username} = router.query
+  const { username } = router.query;
   const selectedUserWallet = !!selectedUser ? selectedUser.wallet : null;
-  console.log('nftsssss', nfts)
 
   useEffect(() => {
     if (username) {
@@ -81,8 +79,8 @@ export default function Users() {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
         <Spinner size="xl" textAlign="center" />
-    </Box>
-    )
+      </Box>
+    );
   }
 
   if (!!wallet && wallet == selectedUser.wallet) {
@@ -113,17 +111,15 @@ export default function Users() {
                 @{selectedUser.username}
               </Text>
               <Box>
-                {/* <ChatIcon
-                  mr={4}
-                  _hover={{ cursor: "pointer", opacity: "0.8" }}
-                /> */}
-                {!!wallet ? <Button
-                  w={100}
-                  borderRadius={50}
-                  onClick={() => follow(wallet, selectedUser.username)}
-                >
-                  {buttonTitle}
-                </Button> : null}
+                {!!wallet ? (
+                  <Button
+                    w={100}
+                    borderRadius={50}
+                    onClick={() => follow(wallet, selectedUser.username)}
+                  >
+                    {buttonTitle}
+                  </Button>
+                ) : null}
               </Box>
             </Stack>
             <Text mt={5}>{selectedUser.bio}</Text>

@@ -25,7 +25,6 @@ export const fetchSelectedUser = createAsyncThunk(
   }
 )
 
-// follow / unfollow thunks
 export const followUser = createAsyncThunk(
   'followers/followUser',
   async (info) => {
