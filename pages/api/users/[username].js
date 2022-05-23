@@ -36,6 +36,17 @@ export default async function handler(req, res) {
         where: {
           username: username
         },
+        include: [
+          {model: Collections, include: {model: User}},
+          {model: Post, include: [
+            {model: User},
+            {model: LikePost},
+            {model: Comments, include: [
+              {model: User},
+              {model: LikeComments}
+          ]}
+          ]}
+        ]
       })
       const me = await User.findOne({
         where: {
