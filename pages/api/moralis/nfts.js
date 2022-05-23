@@ -34,7 +34,7 @@ export default async function handler(req,res){
                         listingId: null,
                         buyoutPrice: null,
                         expirationDate: null,
-                        hidden: true,
+                        hidden: false,
                         collectionId: null,
                         createdAt: nftData.synced_at,
                     }
