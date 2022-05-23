@@ -31,7 +31,7 @@ export default function UserProfile() {
   const [usernames, setUsernames] = useState([]);
   const { nfts } = useSelector((state) => state.nfts);
   const [hidden, setHidden] = useState(false);
-  const [display, setDisplay] = useState("NFT"); // switch bw post and nft
+  const [display, setDisplay] = useState("NFT"); // switch bw post / nft / collection
   const { AllPost: post, status } = useSelector((state) => state.socialPost);
 
   useEffect(() => {
@@ -122,13 +122,25 @@ export default function UserProfile() {
         justifyContent="center"
         mb={2}
       >
-        <Button variant="ghost" onClick={() => setDisplay("NFT")} disabled={!user.username ? true : false}>
+        <Button
+          variant="ghost"
+          onClick={() => setDisplay("NFT")}
+          disabled={!user.username ? true : false}
+        >
           NFTs
         </Button>
-        <Button variant="ghost" onClick={() => setDisplay("POST")} disabled={!user.username ? true : false}>
+        <Button
+          variant="ghost"
+          onClick={() => setDisplay("POST")}
+          disabled={!user.username ? true : false}
+        >
           Posts
         </Button>
-        <Button variant="ghost" onClick={() => setDisplay("COLLECTION")} disabled={!user.username ? true : false}>
+        <Button
+          variant="ghost"
+          onClick={() => setDisplay("COLLECTION")}
+          disabled={!user.username ? true : false}
+        >
           Collections
         </Button>
       </Stack>

@@ -6,12 +6,6 @@ export default async function handler(req, res) {
 
   switch (method) {
     case 'GET':
-      // const user = await User.findOne({
-      //   where: {
-      //     username: username
-      //   },
-      //   include: {model: Post}
-      // });
       const user = await User.findOne({
         where: {
           username: username

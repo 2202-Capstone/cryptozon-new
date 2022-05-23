@@ -8,7 +8,6 @@ export const setActiveNft = createAsyncThunk(
   "activeNfts/setActiveNft",
   async (data) => {
     try {
-      console.log(data)
       return data;
     } catch (error) {
       console.log(error)
