@@ -30,6 +30,7 @@ export default function Users() {
   const router = useRouter();
   const dispatch = useDispatch();
   const wallet = useAddress();
+  const {user} = useSelector(state => state.user)
   const { selectedUser } = useSelector((state) => state.selectedUser);
   const { nfts } = useSelector((state) => state.nfts);
   const { AllPost: post, status } = useSelector((state) => state.socialPost);
@@ -111,7 +112,7 @@ export default function Users() {
                 @{selectedUser.username}
               </Text>
               <Box>
-                {!!wallet ? (
+                {!!wallet && !!user.username ? (
                   <Button
                     w={100}
                     borderRadius={50}
