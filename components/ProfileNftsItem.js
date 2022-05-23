@@ -28,6 +28,7 @@ export default function ProfileNftsItem({ nft, toggle, iconHover }) {
       status: "error",
       duration: 5000,
       isClosable: true,
+      position: "top",
     });
 
     try {

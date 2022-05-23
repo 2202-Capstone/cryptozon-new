@@ -8,7 +8,7 @@ import {
   AlertDialogOverlay,
   Button,
   useColorModeValue,
-  Input,
+  Textarea,
   Spinner,
 } from "@chakra-ui/react";
 export default function ProfileNFTPostAlert({
@@ -35,8 +35,7 @@ export default function ProfileNFTPostAlert({
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              <Input
-                type="text"
+              <Textarea
                 value={text}
                 onChange={(e) => {
                   setText(e.target.value);
