@@ -64,6 +64,10 @@ export default function SellButton({ marketplace, nft }) {
       console.log(err);
       if (err.message.includes("wallet"))
         errorMessage = "You are not connected to the wallet";
+      if (err.message.includes("insufficient funds"))
+        errorMessage = "You are low on funds.";
+      if (err.message.includes("denied"))
+        errorMessage = "You denied the transaction request.";
       toast({
         title: "Error selling nft",
         position: "top",

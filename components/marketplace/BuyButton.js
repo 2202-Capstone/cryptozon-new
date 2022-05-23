@@ -24,7 +24,12 @@ export default function BuyButton({ marketplace, nft, wallet }) {
       });
     } catch (err) {
       let errorMessage = "Something went wrong";
-      console.log(err.message);
+      if (err.message.includes("wallet"))
+        errorMessage = "You are not connected to the wallet";
+      if (err.message.includes("insufficient funds"))
+        errorMessage = "You are low on funds.";
+      if (err.message.includes("denied"))
+        errorMessage = "You denied the transaction request.";
       setLoading(false);
       toast({
         title: "Error buying nft",
