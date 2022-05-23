@@ -4,9 +4,9 @@ const axios = require("axios");
 const Moralis = require("moralis/node");
 
 //convert to env variables
-const serverUrl = "https://mixtowg6gzx7.usemoralis.com:2053/server";
-const appId = "rP7p98Lr9FFmhiQEX9GsZoMRlQA6QwHqVvkCdHRI";
-const masterKey = "EWj2dIJWjzW7BzqD1Qnv90idnTBjXfbB8eVRJO0k";
+const serverUrl = process.env.MORALIS_SERVER_URL;
+const appId = process.env.MORALIS_APP_ID;
+const masterKey = process.env.MORALIS_MASTER_KEY;
 
 export default async function handler(req,res){
     const {method, body, query} = req;
