@@ -12,9 +12,8 @@ import {
 import { useMarketplace, useAddress } from "@thirdweb-dev/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+
 import { buyNFTInShop } from "../../utils";
-import { collectionActions } from "../../store/collections";
 
 const NFTActiveItem = (props) => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +21,7 @@ const NFTActiveItem = (props) => {
   const { name, image, price, id, tokenId, sellerAddress } = props;
 
   const address = useAddress();
-  const dispatch = useDispatch();
+
   const marketplace = useMarketplace(
     process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS
   );
@@ -32,9 +31,7 @@ const NFTActiveItem = (props) => {
     try {
       setLoading(true);
       const nftId = await buyNFTInShop(marketplace, name, id, address);
-      dispatch(
-        collectionActions.changeNFTOwner({ wallet: address, id: nftId })
-      );
+
       setLoading(false);
       toast({
         title: "Bought NFT!",

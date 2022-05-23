@@ -12,14 +12,12 @@ import {
 import { useMarketplace, useAddress } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { buyNFTInShop } from "../../utils";
-import { collectionActions } from "../../store/collections";
-import { useDispatch } from "react-redux";
 
 const NFTSingleItem = (props) => {
   const [loading, setLoading] = useState(false);
   const { name, image, price, id, tokenId, sellerAddress } = props;
   const toast = useToast();
-  const dispatch = useDispatch();
+
   const address = useAddress();
   const marketplace = useMarketplace(
     process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS
@@ -30,9 +28,7 @@ const NFTSingleItem = (props) => {
     try {
       setLoading(true);
       const nftId = await buyNFTInShop(marketplace, name, id, address);
-      dispatch(
-        collectionActions.changeNFTOwner({ wallet: address, id: nftId })
-      );
+
       setLoading(false);
       toast({
         title: "Bought NFT!",
