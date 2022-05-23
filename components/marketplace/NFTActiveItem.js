@@ -74,7 +74,13 @@ const NFTActiveItem = (props) => {
       borderColor="gray.300"
     >
       <Link key={tokenId} href={`nfts/${tokenId}`} passHref>
-        <Image src={image} alt="nft pic" objectFit="contain" boxSize="350px" />
+        <Image
+          src={image}
+          alt="nft pic"
+          objectFit="cover"
+          boxSize="350px"
+          w="100%"
+        />
       </Link>
       <Grid templateColumns="repeat(2,1fr)" p="4">
         <Gi>

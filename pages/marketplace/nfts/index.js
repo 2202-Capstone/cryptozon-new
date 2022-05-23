@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment as Fr } from "react";
-import { Box, Heading, Flex } from "@chakra-ui/react";
+import { Box, Heading, Grid } from "@chakra-ui/react";
 import Head from "next/head";
 import { useSelector } from "react-redux";
 import NFTActiveItem from "../../../components/marketplace/NFTActiveItem";
@@ -33,7 +33,11 @@ const Marketplace = () => {
             Fetching listings from the blockchain...
           </Box>
         ) : (
-          <Flex gap="8" wrap="wrap" justifyContent={"center"}>
+          <Grid
+            templateColumns="repeat(auto-fill, 22.5rem)"
+            gap="8"
+            justifyContent={"center"}
+          >
             {activeNfts.activeNfts.length > 0 ? (
               activeNfts.activeNfts[0].map((nft) => {
                 const { name, description, image } = nft.asset;
@@ -59,7 +63,7 @@ const Marketplace = () => {
                 No listings
               </Box>
             )}
-          </Flex>
+          </Grid>
         )}
       </Box>
     </Fr>
