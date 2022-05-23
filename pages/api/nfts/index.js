@@ -31,12 +31,12 @@ const getOwnerNFTs = wrapAsync(async (req, res) => {
 const toggleHidden = wrapAsync(async (req, res) => {
   const nft = await NFTs.findOne({
     where: {
-      id: req.body.id
-    }
-  })
-  const updatedNft = await nft.update(req.body)
-  return res.status(200).json({ status: "success", data: updatedNft})
-})
+      id: req.body.id,
+    },
+  });
+  const updatedNft = await nft.update(req.body);
+  return res.status(200).json({ status: "success", data: updatedNft });
+});
 
 export default async function handler(req, res) {
   try {
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
           return await getOwnerNFTs(req, res);
         }
       case "PUT":
-        return await toggleHidden(req, res)
+        return await toggleHidden(req, res);
       default:
         throw new Error("Not a route.");
     }
