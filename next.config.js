@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS:
-      "0x34d93E2f645bDe7773e0Ffa40d2454B0A5baEbcC",
+      "0x4706EBDBEB43dFe087ec9a18e3de6137454C0534",
     NFT_COLECTION_CONTRACT_ADDRESS:
       "0x7D0174cFA3A20F5c9a2d5f44B43Ec7945599a201",
     MORALIS_SERVER_URL: "https://mixtowg6gzx7.usemoralis.com:2053/server",
