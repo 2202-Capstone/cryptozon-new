@@ -21,7 +21,7 @@ export default async function handler(req,res){
                     const imageIPFT = metadata.image.split('').slice(7).join('')
                     const imageUrl = `https://cryptozon.infura-ipfs.io/ipfs/${imageIPFT}`
                     if(nftsInDB.length>0){
-                        console.log('found nft in db using that info')
+                        // console.log('found nft in db using that info')
                     }else{
                         const newNft = {
                             owner: query.address,

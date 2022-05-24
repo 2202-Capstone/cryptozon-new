@@ -1,19 +1,23 @@
 import { Button,Box,useColorModeValue } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-export default function ShowFollowers() {
+export default function ShowFollowers(props) {
     const { user: walletUser } = useSelector((state) => state.user);
     const [toggle, setToggle] = useState(false);
-    const [buttonText, setButtonText] = useState('Show only followers');
+    const [buttonText, setButtonText] = useState('Show only following');
     const colorBtn = useColorModeValue("white", "black");
     const dispatch = useDispatch();
+    const {sFollowers} = props;
     const toggleFollowers = (data) => {
         if(toggle){
             setToggle(false)
-            setButtonText('Show all post')
+            sFollowers(false)
+            setButtonText('Show only following')
+
         }else{
             setToggle(true)
-            setButtonText('Show only followers')
+            sFollowers(true)
+            setButtonText('Show all post')
         }
     };
     return (

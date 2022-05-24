@@ -35,12 +35,14 @@ import { MinusIcon } from "@chakra-ui/icons";
 import DeletePost from "./DeletePost";
 import ShowFollowers from "./ShowFollowers";
 import { fetchFollowers } from "../store/followers";
+import { fetchFollowing } from "../store/following";
 
 export const SocialCard = (props) => {
   const address = useAddress();
   const { user: walletUser } = useSelector((state) => state.user);
-  const { AllPost: post, postStatus } = useSelector((state) => state.socialPost);
-  const { following, followingStatus } = useSelector((state) => state.following);
+  const { AllPost: post, status:postStatus } = useSelector((state) => state.socialPost);
+  // const { following, status:followingStatus } = useSelector((state) => state.following);
+  const { followers, status:followerStatus } = useSelector((state) => state.followers);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
   const [useFollowers,setUseFollowers] = useState(false);
@@ -51,10 +53,10 @@ export const SocialCard = (props) => {
     if (postStatus != "success") {
       dispatch(fetchAllPost());
     }
-    if(followingStatus != "success" && walletUser!=null){
-      dispatch(fetchFollowers(walletUser.wallet))
+    if(followerStatus != "success" && !!walletUser.wallet){
+      dispatch(fetchFollowers(walletUser.username))
     }
-  }, [postStatus,followingStatus, dispatch,walletUser]);
+  }, [postStatus, dispatch, walletUser.wallet, useFollowers]);
 
   const unlikePost = (id, e) => {
     e.target.hidden = true;
@@ -123,20 +125,21 @@ export const SocialCard = (props) => {
   if (!!props.posts) {
     tempPost = [...props.posts];
     tempPost.sort((a, b) => b.id - a.id);
-    if(useFollowers){
-      console.log('following: ',following)
-
-      tempPost = tempPost.filter(post=>{
-        
-        
-
-      })
-    }
+    
   } else {
     if (!!post) {
       tempPost = [...post];
     }
   }
+
+    if(useFollowers){
+      tempPost = tempPost.filter(post=>{
+        return followers.some(follower=>{
+          return follower.id == post.userId
+        })
+      })
+    }
+
   return (
     <Box display="flex" flexDirection="column" align="center" gap="4">
       {/* {!!address ? 'wallet connected ':'wallet not connected '} */}
@@ -148,7 +151,7 @@ export const SocialCard = (props) => {
         data={data}
         addComment={addComment}
       />
-      {!!props.user ? null : !!walletUser.username ? <ShowFollowers /> : null}
+      {!!props.user ? null : !!walletUser.username ? <ShowFollowers sFollowers = {setUseFollowers} /> : null}
       {!!post
         ? tempPost.map((singlePostData) => {
             const {
