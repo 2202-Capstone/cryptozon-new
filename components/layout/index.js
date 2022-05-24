@@ -1,11 +1,12 @@
 import { Fragment as Fr, useState, useEffect, useCallback } from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import Navbar from "./Navbar";
-import Notifications from './Notifications'
+import Notifications from "./Notifications";
 import { useDispatch } from "react-redux";
 // import { setNFT, } from "../../store/nfts";
 import { useMarketplace } from "@thirdweb-dev/react";
 import { setActiveNft } from "../../store/activeNfts";
+import axios from "axios";
 
 export default function Layout({ children }) {
   const marketplace = useMarketplace(
@@ -44,7 +45,7 @@ export default function Layout({ children }) {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const getAllActiveListings = async () => {
     try {
@@ -55,10 +56,7 @@ export default function Layout({ children }) {
     } catch (error) {
       console.log(error);
     }
-  }
-
-
-
+  };
 
   return (
     <Fr>

@@ -92,7 +92,7 @@ export default function SocialSinglePost({
                           alignItems="center"
                           gap="1"
                         >
-                          {likes_comments.length} likes
+                          {likes_comments.length}
                           <Icon
                             as={FaRegHeart}
                             cursor="pointer"

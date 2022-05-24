@@ -24,6 +24,10 @@ function MyApp({ Component, pageProps }) {
         <ChakraProvider theme={theme}>
           <Layout>
             <Head>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
               <title>Cryptozon</title>
             </Head>
             <Component {...pageProps} />
