@@ -12,7 +12,6 @@ export default async function handler(req,res){
     const {method, body, query} = req;
     switch (method) {
         case 'GET':
-            console.log(body)
             await Moralis.start({ serverUrl, appId, masterKey });
             const ownedNFTs = await Moralis.Web3API.account.getNFTs({address:query.address, chain:'rinkeby'})
             const proccessNfts = await Promise.all(ownedNFTs.result.map(async (nftData,ind) =>{
@@ -22,7 +21,7 @@ export default async function handler(req,res){
                     const imageIPFT = metadata.image.split('').slice(7).join('')
                     const imageUrl = `https://cryptozon.infura-ipfs.io/ipfs/${imageIPFT}`
                     if(nftsInDB.length>0){
-                        console.log('found nft in db using that info')
+                        // console.log('found nft in db using that info')
                     }else{
                         const newNft = {
                             owner: query.address,

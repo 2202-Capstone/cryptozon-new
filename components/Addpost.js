@@ -27,7 +27,6 @@ export default function Addpost() {
   const logNFTs = async () => {
     const nfts = await contract.getAll();
     const filteredNfts = nfts.filter(nft => nft.owner === walletUser.wallet)
-    console.log(filteredNfts);
   }
   const addPost = (userId,post,imgUrl) =>{
     const initialSubs = [userId]
