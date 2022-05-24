@@ -56,7 +56,7 @@ export const SocialCard = (props) => {
     if(followingStatus != "success" && !!walletUser.wallet){
       dispatch(fetchFollowing(walletUser.username))
     }
-  }, [postStatus, dispatch, walletUser.wallet, useFollowers]);
+  }, [postStatus, dispatch, walletUser.wallet, useFollowers, followingStatus]);
 
   const unlikePost = (id, e) => {
     e.target.hidden = true;
