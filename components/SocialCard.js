@@ -33,21 +33,28 @@ import Addpost from "./Addpost";
 import Link from "next/link";
 import { MinusIcon } from "@chakra-ui/icons";
 import DeletePost from "./DeletePost";
+import ShowFollowers from "./ShowFollowers";
+import { fetchFollowers } from "../store/followers";
 
 export const SocialCard = (props) => {
   const address = useAddress();
   const { user: walletUser } = useSelector((state) => state.user);
-  const { AllPost: post, status } = useSelector((state) => state.socialPost);
+  const { AllPost: post, postStatus } = useSelector((state) => state.socialPost);
+  const { following, followingStatus } = useSelector((state) => state.following);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
+  const [useFollowers,setUseFollowers] = useState(false);
   const [viewComment, setViewComment] = useState(false);
   const dispatch = useDispatch();
   const borderClr = useColorModeValue("gray.300", "gray.600");
   useEffect(() => {
-    if (status != "success") {
+    if (postStatus != "success") {
       dispatch(fetchAllPost());
     }
-  }, [status, dispatch]);
+    if(followingStatus != "success" && walletUser!=null){
+      dispatch(fetchFollowers(walletUser.wallet))
+    }
+  }, [postStatus,followingStatus, dispatch,walletUser]);
 
   const unlikePost = (id, e) => {
     e.target.hidden = true;
@@ -116,6 +123,15 @@ export const SocialCard = (props) => {
   if (!!props.posts) {
     tempPost = [...props.posts];
     tempPost.sort((a, b) => b.id - a.id);
+    if(useFollowers){
+      console.log('following: ',following)
+
+      tempPost = tempPost.filter(post=>{
+        
+        
+
+      })
+    }
   } else {
     if (!!post) {
       tempPost = [...post];
@@ -132,6 +148,7 @@ export const SocialCard = (props) => {
         data={data}
         addComment={addComment}
       />
+      {!!props.user ? null : !!walletUser.username ? <ShowFollowers /> : null}
       {!!post
         ? tempPost.map((singlePostData) => {
             const {
