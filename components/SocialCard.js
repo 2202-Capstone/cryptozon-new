@@ -163,7 +163,7 @@ export const SocialCard = (props) => {
         data={data}
         addComment={addComment}
       />
-      {!!props.user ? null : !!walletUser.username ? (
+      {!!props.user ? null : !!props.me ? null : !!walletUser.username ? (
         <ShowFollowers sFollowers={setUseFollowers} />
       ) : null}
       {!!post
