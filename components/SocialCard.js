@@ -224,7 +224,7 @@ export const SocialCard = (props) => {
                       alt=""
                       width="100%"
                       objectFit="cover"
-                      maxH="43.8rem"
+                      maxH="41.5rem"
                     />
                   </Box>
                 ) : (
