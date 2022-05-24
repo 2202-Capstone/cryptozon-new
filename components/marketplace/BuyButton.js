@@ -4,7 +4,6 @@ import { buyNFT } from "../../utils";
 import { useDispatch } from "react-redux";
 import { collectionActions } from "../../store/collections";
 export default function BuyButton({ marketplace, nft, wallet }) {
-  console.log(wallet);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const toast = useToast();

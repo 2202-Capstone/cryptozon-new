@@ -46,7 +46,6 @@ export default async function handler(req,res){
                 }
                 
             }))
-            console.log(proccessNfts.length," nfts found")
             const ownerNFTs = await NFTs.findAll({ where: { owner: query.address } });
             res.status(200).send({status:"success",data:ownerNFTs})
             break;

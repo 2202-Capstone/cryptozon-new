@@ -2,7 +2,6 @@
 const {User, Post, Comments, LikePost, LikeComments} = require('../../db')
 export default async function handler(req,res){
     const {method} = req;
-    console.log('method: ',method)
 
     switch (method) {
         case 'PUT':
@@ -11,7 +10,6 @@ export default async function handler(req,res){
                     postId: req.body.postId,
                     userId: req.body.userId
                 }})
-                console.log('likecheck length: ', likeCheck.length)
                 if(likeCheck.length<1){
                     await LikePost.create(req.body);
                 }
@@ -21,7 +19,6 @@ export default async function handler(req,res){
                     commentId: req.body.commentId,
                     userId: req.body.userId
                 }})
-                console.log('likecheck length: ', likeCheck.length)
                 if(likeCheck.length<1){
                     await LikeComments.create(req.body);
                 }
@@ -34,7 +31,6 @@ export default async function handler(req,res){
                     postId: req.body.postId,
                     userId: req.body.userId
                 }})
-                console.log('likecheck delete length: ', likeCheck.length)
                 if(likeCheck.length>0){
                     await LikePost.destroy({where:{
                         postId: req.body.postId,
@@ -47,7 +43,6 @@ export default async function handler(req,res){
                     commentId: req.body.commentId,
                     userId: req.body.userId
                 }})
-                console.log('likecheck delete length: ', likeCheck.length)
                 if(likeCheck.length>0){
                     await LikeComments.destroy({where:{
                         commentId: req.body.commentId,

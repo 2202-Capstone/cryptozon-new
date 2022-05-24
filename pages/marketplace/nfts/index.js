@@ -9,7 +9,6 @@ const Marketplace = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log(activeNfts.activeNfts.length);
     let timer;
     if (!activeNfts.activeNfts.length)
       timer = setTimeout(() => setIsLoading(false), 8500);
