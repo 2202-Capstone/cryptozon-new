@@ -1,10 +1,17 @@
 import { wrapAsync } from "../../../utils";
-import { NFTs } from "../../../db";
-
+import { NFTs, User, Notifications } from "../../../db";
 //this will also be used for buying.
 const transferNFT = wrapAsync(async (req, res) => {
   const { owner } = req.body;
   const [, id] = req.query.action;
+  const {owner:oldOwner, name:nftName, buyoutPrice:nftPrice} = await NFTs.findOne({where:{id}})
+  const {id:oldOwnerId} = await User.findOne({where: {wallet:oldOwner}})
+  const newNotification = {
+    title: 'You sold an NFT!',
+    content: `Your NFT ${nftName} was sold for ${nftPrice} ETH!`,
+    userId: oldOwnerId,
+  }
+  await Notifications.create(newNotification)
   const [, transferredNFT] = await NFTs.update(
     { owner, listingId: null, buyoutPrice: null, expirationDate: null },
     { where: { id }, returning: true }
