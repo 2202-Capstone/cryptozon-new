@@ -30,7 +30,7 @@ export default async function handler(req, res) {
           where: {
             id: f.userId
           },
-          attributes: ["username", "imageUrl"]
+          attributes: ["username", "imageUrl", "id"]
         })
         return person
       }))

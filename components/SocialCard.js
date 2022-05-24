@@ -41,7 +41,7 @@ export const SocialCard = (props) => {
   const address = useAddress();
   const { user: walletUser } = useSelector((state) => state.user);
   const { AllPost: post, status:postStatus } = useSelector((state) => state.socialPost);
-  // const { following, status:followingStatus } = useSelector((state) => state.following);
+  const { following, status:followingStatus } = useSelector((state) => state.following);
   const { followers, status:followerStatus } = useSelector((state) => state.followers);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
@@ -53,8 +53,8 @@ export const SocialCard = (props) => {
     if (postStatus != "success") {
       dispatch(fetchAllPost());
     }
-    if(followerStatus != "success" && !!walletUser.wallet){
-      dispatch(fetchFollowers(walletUser.username))
+    if(followingStatus != "success" && !!walletUser.wallet){
+      dispatch(fetchFollowing(walletUser.username))
     }
   }, [postStatus, dispatch, walletUser.wallet, useFollowers]);
 
@@ -134,10 +134,11 @@ export const SocialCard = (props) => {
 
     if(useFollowers){
       tempPost = tempPost.filter(post=>{
-        return followers.some(follower=>{
+        return following.some(follower=>{
           return follower.id == post.userId
         })
       })
+      console.log('following',following,'filtered: ',tempPost)
     }
 
   return (
