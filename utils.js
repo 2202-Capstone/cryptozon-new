@@ -12,8 +12,6 @@ export const sellNFT = async (contract, nft, price) => {
   try {
     if (nft.listingId && Date.now() < nft.expirationDate)
       throw new Error("Item is already for sale");
-    console.log(contract, nft, price);
-    console.log(NATIVE_TOKEN_ADDRESS);
     const listingDur = 2630000;
     const listing = {
       assetContractAddress: nft.assetContractAddress,

@@ -145,7 +145,6 @@ export const SocialCard = (props) => {
           return follower.id == post.userId
         })
       })
-      console.log('following',following,'filtered: ',tempPost)
     }
 
   return (
