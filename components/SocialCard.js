@@ -40,12 +40,18 @@ import { fetchFollowing } from "../store/following";
 export const SocialCard = (props) => {
   const address = useAddress();
   const { user: walletUser } = useSelector((state) => state.user);
-  const { AllPost: post, status:postStatus } = useSelector((state) => state.socialPost);
-  const { following, status:followingStatus } = useSelector((state) => state.following);
-  const { followers, status:followerStatus } = useSelector((state) => state.followers);
+  const { AllPost: post, status: postStatus } = useSelector(
+    (state) => state.socialPost
+  );
+  const { following, status: followingStatus } = useSelector(
+    (state) => state.following
+  );
+  const { followers, status: followerStatus } = useSelector(
+    (state) => state.followers
+  );
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
-  const [useFollowers,setUseFollowers] = useState(false);
+  const [useFollowers, setUseFollowers] = useState(false);
   const [viewComment, setViewComment] = useState(false);
   const dispatch = useDispatch();
   const borderClr = useColorModeValue("gray.300", "gray.600");
@@ -57,12 +63,12 @@ export const SocialCard = (props) => {
     if (postStatus != "success") {
       dispatch(fetchAllPost());
     }
-    if(followingStatus != "success" && !!walletUser.wallet){
-      dispatch(fetchFollowing(walletUser.username))
+    if (followingStatus != "success" && !!walletUser.wallet) {
+      dispatch(fetchFollowing(walletUser.username));
     }
-    return () =>{
+    return () => {
       clearInterval(interval);
-    }
+    };
   }, [postStatus, dispatch, walletUser.wallet, useFollowers, followingStatus]);
 
   const unlikePost = (id, e) => {
@@ -132,20 +138,19 @@ export const SocialCard = (props) => {
   if (!!props.posts) {
     tempPost = [...props.posts];
     tempPost.sort((a, b) => b.id - a.id);
-    
   } else {
     if (!!post) {
       tempPost = [...post];
     }
   }
 
-    if(useFollowers){
-      tempPost = tempPost.filter(post=>{
-        return following.some(follower=>{
-          return follower.id == post.userId
-        })
-      })
-    }
+  if (useFollowers) {
+    tempPost = tempPost.filter((post) => {
+      return following.some((follower) => {
+        return follower.id == post.userId;
+      });
+    });
+  }
 
   return (
     <Box display="flex" flexDirection="column" align="center" gap="4">
@@ -158,7 +163,9 @@ export const SocialCard = (props) => {
         data={data}
         addComment={addComment}
       />
-      {!!props.user ? null : !!walletUser.username ? <ShowFollowers sFollowers = {setUseFollowers} /> : null}
+      {!!props.user ? null : !!walletUser.username ? (
+        <ShowFollowers sFollowers={setUseFollowers} />
+      ) : null}
       {!!post
         ? tempPost.map((singlePostData) => {
             const {
@@ -212,7 +219,13 @@ export const SocialCard = (props) => {
 
                 {postImage ? (
                   <Box>
-                    <Image src={imageUrl} alt="" width="100%" />
+                    <Image
+                      src={imageUrl}
+                      alt=""
+                      width="100%"
+                      objectFit="cover"
+                      maxH="43.8rem"
+                    />
                   </Box>
                 ) : (
                   <Box>
