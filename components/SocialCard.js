@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment as Fr } from "react";
+import React, { useEffect, useState, Fragment as Fr, useRef } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -49,12 +49,19 @@ export const SocialCard = (props) => {
   const [viewComment, setViewComment] = useState(false);
   const dispatch = useDispatch();
   const borderClr = useColorModeValue("gray.300", "gray.600");
+  const intervalSet = useRef(false);
   useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(fetchAllPost());
+    }, 5000);
     if (postStatus != "success") {
       dispatch(fetchAllPost());
     }
     if(followingStatus != "success" && !!walletUser.wallet){
       dispatch(fetchFollowing(walletUser.username))
+    }
+    return () =>{
+      clearInterval(interval);
     }
   }, [postStatus, dispatch, walletUser.wallet, useFollowers, followingStatus]);
 
