@@ -102,7 +102,7 @@ export default function CollectionForm({ address }) {
         title="Banner Photo"
         name="banner"
         h="200px"
-        w="600px"
+        w={["100%", "100%", "600px"]}
         image={image2}
         setImage={setImage2}
       />

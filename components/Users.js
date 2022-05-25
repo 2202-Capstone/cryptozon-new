@@ -30,7 +30,7 @@ export default function Users() {
   const router = useRouter();
   const dispatch = useDispatch();
   const wallet = useAddress();
-  const {user} = useSelector(state => state.user)
+  const { user } = useSelector((state) => state.user);
   const { selectedUser } = useSelector((state) => state.selectedUser);
   const { nfts } = useSelector((state) => state.nfts);
   const { AllPost: post, status } = useSelector((state) => state.socialPost);
@@ -107,7 +107,10 @@ export default function Users() {
             mr={10}
           />
           <Flex direction="column" w={500} mt="15px">
-            <Stack direction="row" spacing={220}>
+            <Stack
+              direction={["column", "column", "row"]}
+              spacing={[4, 4, 220]}
+            >
               <Text fontWeight="bold" fontSize={26}>
                 @{selectedUser.username}
               </Text>
@@ -138,7 +141,7 @@ export default function Users() {
       <Stack
         direction="row"
         textAlign="center"
-        spacing={10}
+        spacing={[4, 4, 10]}
         display="flex"
         justifyContent="center"
         mb={2}
