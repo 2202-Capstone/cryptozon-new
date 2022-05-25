@@ -102,7 +102,7 @@ export default function UserProfile() {
                 {user.followers + " Followers"}
               </Link>
             </Stack>
-            <Box ml={330}>
+            <Box ml={[0, 0, 330]}>
               <EditProfile user={user} wallet={address} usernames={usernames} />
             </Box>
           </Flex>

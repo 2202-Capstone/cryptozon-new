@@ -137,11 +137,13 @@ const DarkModeSwitch = () => {
         left="0"
         overflowY="auto"
         flexDir="column"
+        alignItems={"center"}
         display={display}
       >
         <Flex justify="flex-end">
           <IconButton
             mt={2}
+            mb={8}
             mr={2}
             aria-label="Close Menu"
             size="lg"
@@ -155,7 +157,6 @@ const DarkModeSwitch = () => {
               as={ChakraLink}
               variant="ghost"
               aria-label="Contact"
-              my={5}
               w="100%"
             >
               Shop
@@ -172,6 +173,7 @@ const DarkModeSwitch = () => {
               Discovery
             </Button>
           </Link>
+          <CreateNav />
           {address ? (
             <Link href="/profile" passHref>
               <Button
