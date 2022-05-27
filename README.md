@@ -23,3 +23,10 @@ Cryptozon was created due to the lack of social media capabilities in current NF
 - Fetch all NFTs associated to your wallet 
 - Follow other users, view following and followers
 - Edit NFT collections and edit profile
+
+## Team 
+<ul>
+  <li>
+    <a href="https://github.com/beksina">Bekim Sinanovic</a>
+  </li>  
+</ul>
