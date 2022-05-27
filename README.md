@@ -27,6 +27,15 @@ Cryptozon was created due to the lack of social media capabilities in current NF
 ## Team 
 <ul>
   <li>
+    <a href="https://github.com/elans-code">Elan Savinon</a>
+  </li>  
+  <li>
     <a href="https://github.com/beksina">Bekim Sinanovic</a>
+  </li>
+  <li>
+    <a href="https://github.com/temanbecki1">Teman Beck</a>
+  </li>
+  <li>
+    <a href="https://github.com/EjMat8">Franz Elijah Matugas</a>
   </li>  
 </ul>
