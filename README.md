@@ -1,40 +1,25 @@
-## Getting Started
+# Cryptozon 
+Live demo: https://www.cryptozon.app/post
 
-First, intall the required dependencies:
+Cryptozon is an NFT marketplace with social media features. Users are able to share posts, like and comment on other posts, follow users, customize their own profiles, as well as buy and sell NFTs. This application was built in less than three weeks with a team of four during the Fullstack Academy 2202 cohort. 
 
-```bash
-npm install
-# or
-yarn install
-```
+## General Information
+Cryptozon was created due to the lack of social media capabilities in current NFT marketplaces. This application integrates the connectivity that social media provides, allowing users to connect all over the world and show off some of their NFTs. To create an account or sign into the application just connect your metamask wallet to the website!
 
-Then, run the development server:
+## Tech used
+- React
+- Next js
+- Redux Toolkit
+- PostgreSQL
+- Moralis
+- Third Web
+- Chakra UI
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-On `pages/_app.js`, you'll find our `ThirdwebProvider` wrapping your app, this is necessary for our hooks to work.
-
-on `pages/index.js`, you'll find the `useMetamask` hook that we use to connect the user's wallet to MetaMask, `useDisconnect` that we use to disconnect it, and `useAddress` to check the user's wallet address once connected. 
-
-## Learn More
-
-To learn more about thirdweb and Next.js, take a look at the following resources:
-
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb JavaScript Documentation](https://docs.thirdweb.com/react) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com/react) - check our guides and development resources.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
-
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+## Features 
+- Sign in and sign up with metamask 
+- Create NFT collections and mint your own NFTs
+- Purchase NFTs that are listed / sell NFTs 
+- Create posts, as well as like and comment on posts
+- Fetch all NFTs associated to your wallet 
+- Follow other users, view following and followers
+- Edit NFT collections and edit profile
