@@ -15,6 +15,7 @@ const Navbar = ({ intersects }) => {
       transition="all 0.4s"
       zIndex="50"
       boxShadow={intersects ? "base" : "none"}
+
     >
       <NextLink href="/post" passHref>
         <Heading
